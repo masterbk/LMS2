@@ -1,0 +1,13 @@
+disk/storage-minio/data/*
+disk/maria-db/data/node1/*
+disk/maria-db/data/node2/*
+disk/maria-db/data/node3/*
+disk/caching-redis/data/*
+disk/nfs-service/data/*
+
+!disk/maria-db/data/node1/readme.bak
+!disk/maria-db/data/node2/readme.bak
+!disk/maria-db/data/node3/readme.bak
+!disk/caching-redis/data/readme.bak
+!disk/storage-minio/data/readme.bak
+!disk/nfs-service/data/readme.bak

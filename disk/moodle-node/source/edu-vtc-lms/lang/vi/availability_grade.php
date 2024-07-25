@@ -1,0 +1,21 @@
+<?php
+$string["cachedef_items"] = 'Xếp hạng các mục được lưu trong bộ nhớ đệm để đánh giá tình trạng sẵn có có điều kiện';
+$string["cachedef_scores"] = 'Điểm của người dùng được lưu vào bộ nhớ đệm để đánh giá tính khả dụng có điều kiện';
+$string["description"] = 'Yêu cầu học sinh đạt điểm quy định.';
+$string["error_backwardrange"] = 'Khi chỉ định phạm vi điểm, mức tối thiểu phải thấp hơn mức tối đa.';
+$string["error_invalidnumber"] = 'Phạm vi lớp phải được chỉ định với tỷ lệ phần trăm hợp lệ.';
+$string["error_selectgradeid"] = 'Bạn phải chọn một hạng mục cho điều kiện hạng.';
+$string["label_min"] = 'Tỷ lệ điểm tối thiểu (bao gồm)';
+$string["label_max"] = 'Tỷ lệ phần trăm điểm tối đa (độc quyền)';
+$string["option_min"] = 'cần phải';
+$string["option_max"] = 'phải là <';
+$string["pluginname"] = 'Hạn chế theo cấp độ';
+$string["requires_any"] = 'Bạn có điểm trong <strong>{$a}</strong>';
+$string["requires_max"] = 'Bạn đạt được điểm thấp hơn một số điểm nhất định trong <strong>{$a}</strong>';
+$string["requires_min"] = 'Bạn đạt được điểm cao hơn một số điểm nhất định trong <strong>{$a}</strong>';
+$string["requires_notany"] = 'Bạn không có điểm trong <strong>{$a}</strong>';
+$string["requires_notgeneral"] = 'Bạn không đạt được số điểm nhất định trong <strong>{$a}</strong>';
+$string["requires_range"] = 'Bạn đạt được số điểm trong một phạm vi nhất định trong <strong>{$a}</strong>';
+$string["missing"] = '(thiếu hoạt động)';
+$string["title"] = 'Cấp';
+$string["privacy:metadata"] = 'Plugin Hạn chế theo điểm không lưu trữ bất kỳ dữ liệu cá nhân nào.';

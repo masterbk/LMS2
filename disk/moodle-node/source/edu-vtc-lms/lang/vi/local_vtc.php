@@ -1,0 +1,20 @@
+<?php
+$string["pluginname"] = 'VTC';
+$string["additionalinfo"] = 'Từ khóa thông tin';
+$string["coursevideo"] = 'Video của khóa học (Link Youtube)';
+$string["coursevideo_help"] = 'Nếu trường này trống, nó sẽ được sử dụng để hiển thị video banner giới thiệu khóa học.';
+$string["coursecontent"] = 'Khóa học nội dung';
+$string["coursecontent_help"] = 'Khóa học nội dung sẽ được hiển thị tại tab \"Tổng quan\" trong khóa học.';
+$string["courseduration"] = 'Khóa học thời gian';
+$string["courseduration_help"] = 'Thời gian dự kiến ​​để hoàn thành khóa học. ';
+$string["references"] = 'Tài liệu tham khảo';
+$string["references_help"] = 'Tài liệu tham khảo là các tài liệu bên ngoài nội dung khóa học. ';
+$string["continuouslyupdate"] = 'Cập nhật liên tục kiến ​​thức';
+$string["continuouslyupdate_help"] = 'Nếu lựa chọn \"Có\" tại trường này, trong phần tổng quan khóa học sẽ có thêm một dòng văn bản có thể cập nhật khóa học liên tục.';
+$string["yes"] = 'Có';
+$string["no"] = 'Không';
+$string["vtclayoutenabled"] = 'Sử dụng bố cục VTC';
+$string["vtclayoutenabled_help"] = 'Nếu lựa chọn \"Có\", giao diện của khóa học sẽ được hiển thị theo cấu trúc khóa học của VTC.';
+$string["course_not_found"] = 'Không tìm thấy khóa học.';
+$string["markedascompleted"] = 'Đã đánh dấu hoàn thành khóa học này.';
+$string["noselfcompletioncriteria"] = 'Khóa học chưa được thiết lập để người học tự động đánh dấu hoàn thành.';

@@ -1,0 +1,599 @@
+{{> theme_moove/head }}
+
+<body {{{ bodyattributes }}}>
+{{> core/local/toast/wrapper}}
+<div id="page-wrapper" class="d-print-block">
+
+    {{{ output.standard_top_of_body_html }}}
+
+    {{> theme_moove/navbar }}
+
+    <div id="page" data-region="mainpage" data-usertour="scroller" class="drawers drag-container bg-white"
+         style="padding:0 !important;">
+
+        <div class="custom-homepage">
+            <div class="custom-page-background" style="position:relative">
+                <div id="customHomepageCarousel" style="min-height: 120px" class="carousel slide custom-homepage-carousel" data-ride="carousel"
+                     data-interval="false">
+                    {{^slidersingleslide}}
+                        <ol class="carousel-indicators" style="margin-bottom: 0">
+                            {{#slides}}
+                                <li data-target="#customHomepageCarousel" data-slide-to="{{{ key }}}"
+                                    {{#active}}class="active"{{/active}}></li>
+                            {{/slides}}
+                        </ol>
+                    {{/slidersingleslide}}
+
+                    <div class="carousel-inner" style="height: 100%">
+                        {{#slides}}
+                            <div class="carousel-item {{#active}}active{{/active}} position-relative custom-homepage-carousel-item"
+                                 style="background-color: #CAE6FF">
+                                <img src="{{publicimage}}/home-banner.png">
+                                <div class="position-absolute custom-slider1-text">
+                                    {{#hascaption}}
+
+                                            {{#title}}
+                                                <div class="custom-slider1-text1">{{{title}}}</div>
+                                            {{/title}}
+                                            {{#caption}}
+                                                <div class="custom-slider1-text2">{{{caption}}}</div>
+                                            {{/caption}}
+                                    {{/hascaption}}
+
+                                    <form class="position-relative" action="/course/index.php" method="get"
+                                          id="yui_3_18_1_1_1695093802395_26">
+                                        <div class="form-group has-search" id="yui_3_18_1_1_1695093802395_25">
+                                            <span class="fa fa-search form-control-feedback "></span>
+                                            <input type="text" name="search" class="form-control"
+                                                   placeholder="{{#str}}searchcourse,theme_moove{{/str}}" value="" data-initial-value=""
+                                                   id="yui_3_18_1_1_1695093802395_24">
+                                            <button>{{#str}}search,theme_moove{{/str}}</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        {{/slides}}
+
+                    </div>
+                    <!--                <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">-->
+                    <!--                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+                    <!--                    <span class="sr-only">Previous</span>-->
+                    <!--                </button>-->
+                    <!--                <button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators" data-slide="next">-->
+                    <!--                    <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+                    <!--                    <span class="sr-only">Next</span>-->
+                    <!--                </button>-->
+                </div>
+                <img src="{{publicimage}}/home/bg-3.png" alt="" class="custom-homepage-banner-3"
+                     style="position: absolute;width: 100%"/>
+
+                <div class="custom-homepage-list-infor d-flex flex-row flex-wrap bg-white justify-content-between"
+                     style="margin: 24px auto auto auto">
+                    <div class="d-flex flex-row">
+                        <img src="{{publicimage}}/home/icongroup.png" alt=""
+                             style="margin-right: 15px;"/>
+                        <div style="display: flex;flex-direction: column;justify-content: center">
+                            <p class="mb-0 custom-title" id="infor1">0</p>
+                            <p class="mb-0 custom-title-content">Truy cập</p>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row">
+                        <img src="{{publicimage}}/home/iconlearned.png" alt=""
+                             style="margin-right: 15px;"/>
+                        <div class="d-flex flex-column justify-content-center">
+                            <p class="mb-0 custom-title " id="infor2">0</p>
+                            <p class="mb-0 custom-title-content">Đã học</p>
+                        </div>
+
+                    </div>
+                    <div class="d-flex flex-row">
+                        <img src="{{publicimage}}/home/iconlession.png" alt=""
+                             style="margin-right: 15px;"/>
+                        <div class="d-flex flex-column justify-content-center">
+                            <p class="mb-0 custom-title" id="infor3">0</p>
+                            <p class="mb-0 custom-title-content">Bài học</p>
+                        </div>
+
+                    </div>
+                    <div style="display: flex;flex-direction: row">
+                        <img src="{{publicimage}}/home/iconteacher.png" alt=""
+                             style="margin-right: 15px;"/>
+                        <div class="d-flex flex-column justify-content-center">
+                            <p class="mb-0 custom-title" id="infor4">0</p>
+                            <p class="mb-0 custom-title-content"> Giảng viên</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="custom-homepage-feature-blog position-relative d-flex flex-column">
+                    <section class="my_page my-courses list-categories node_category w-100"
+                             style="background-color: unset !important;">
+                        <div class="d-flex flex-column">
+                            <span class="big-title">Lĩnh vực đào tạo</span>
+                            <span class="big-title-des" style="margin-top: 16px">Chúng tôi cung cấp hệ thống học đa dạng ngành nghề trong lĩnh vực</span>
+                        </div>
+                        <div data-region="card-deck" role="list">
+                            <div class="card-deck dashboard-card-deck" data-region="card-deck" role="list">
+                                <div class="w-100" style="padding: 15px 20px" data-region="card-deck" role="list">
+                                    <div class="d-flex flex-column" style="gap:35px">
+                                        <div style="position: relative;"
+                                             class="list-categories-body w-100 d-flex flex-column section-courses courses-inprogress">
+                                            <div class="mycourse-list-xl">
+                                                {{#categories.html}}
+                                                    {{#categories.hiddenbuttonnext}}
+                                                        <div class="carousel-controls" style="top:38%">
+                                                            <button class="carousel-control-prev"
+                                                                    href="#carouselListCategories1" role="button"
+                                                                    data-slide="prev"
+                                                                    style="font-size:25px;border-radius: 48px;background: #FFF;box-shadow: 0 6.28195px 37.69169px 0 rgba(0, 0, 0, 0.12);">
+                                                                ❮
+                                                            </button>
+                                                            <button class="carousel-control-next"
+                                                                    href="#carouselListCategories1" role="button"
+                                                                    data-slide="next"
+                                                                    style="font-size:25px;border-radius: 48px;background: #FFF;box-shadow: 0 6.28195px 37.69169px 0 rgba(0, 0, 0, 0.12);">
+                                                                ❯
+                                                            </button>
+                                                        </div>
+                                                    {{/categories.hiddenbuttonnext}}
+                                                {{/categories.html}}
+                                                <div id="carouselListCategories1" data-interval="false"
+                                                     class="carouselListCategories custom-carousel-mycourse carousel slide"
+                                                     data-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        {{#categories.html}}
+                                                            {{{categories.html}}}
+                                                        {{/categories.html}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mycourse-list-lg">
+                                                {{#categories.html}}
+                                                    {{#categories.hiddenbuttonnext2}}
+                                                        <div class="carousel-controls" style="top:38%">
+                                                            <button class="carousel-control-prev"
+                                                                    href="#carouselListCategories2" role="button"
+                                                                    data-slide="prev"
+                                                                    style="font-size:25px;border-radius: 48px;background: #FFF;box-shadow: 0 6.28195px 37.69169px 0 rgba(0, 0, 0, 0.12);">
+                                                                ❮
+                                                            </button>
+                                                            <button class="carousel-control-next"
+                                                                    href="#carouselListCategories2" role="button"
+                                                                    data-slide="next"
+                                                                    style="font-size:25px;border-radius: 48px;background: #FFF;box-shadow: 0 6.28195px 37.69169px 0 rgba(0, 0, 0, 0.12);">
+                                                                ❯
+                                                            </button>
+                                                        </div>
+                                                    {{/categories.hiddenbuttonnext2}}
+                                                {{/categories.html}}
+                                                <div id="carouselListCategories2" data-interval="false"
+                                                     class="carouselListCategories custom-carousel-mycourse carousel slide"
+                                                     data-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        {{#categories.html2}}
+                                                            {{{categories.html2}}}
+                                                        {{/categories.html2}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mycourse-list-md">
+                                                {{#categories.html}}
+                                                    {{#categories.hiddenbuttonnext3}}
+                                                        <div class="carousel-controls" style="top:38%">
+                                                            <button class="carousel-control-prev"
+                                                                    href="#carouselListCategories3" role="button"
+                                                                    data-slide="prev"
+                                                                    style="font-size:25px;border-radius: 48px;background: #FFF;box-shadow: 0 6.28195px 37.69169px 0 rgba(0, 0, 0, 0.12);">
+                                                                ❮
+                                                            </button>
+                                                            <button class="carousel-control-next"
+                                                                    href="#carouselListCategories3" role="button"
+                                                                    data-slide="next"
+                                                                    style="font-size:25px;border-radius: 48px;background: #FFF;box-shadow: 0 6.28195px 37.69169px 0 rgba(0, 0, 0, 0.12);">
+                                                                ❯
+                                                            </button>
+                                                        </div>
+                                                    {{/categories.hiddenbuttonnext3}}
+                                                {{/categories.html}}
+                                                <div id="carouselListCategories3" data-interval="false"
+                                                     class="carouselListCategories custom-carousel-mycourse carousel slide"
+                                                     data-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        {{#categories.html3}}
+                                                            {{{categories.html3}}}
+                                                        {{/categories.html3}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="my_page my-courses list-categories node_category w-100"
+                             style="background-color: unset !important;">
+                        <div class="d-flex flex-column">
+                            <span class="big-title" style="text-transform: unset">KHÓA HỌC NỔI BẬT</span>
+                        </div>
+                        <div data-region="card-deck" role="list">
+                            <div class="card-deck dashboard-card-deck" data-region="card-deck" role="list">
+                                <div class="w-100" style="padding: 15px 20px" data-region="card-deck" role="list">
+                                    <div class="d-flex flex-column" style="gap:35px">
+                                        <div style="position: relative;"
+                                             class="list-course-outstanding-body w-100 d-flex flex-column section-courses courses-inprogress">
+                                            <div class="mycourse-list-xl">
+                                                {{#courses.html}}
+                                                    {{#courses.hiddenbuttonnext}}
+                                                        <div class="carousel-controls" style="top:38%">
+                                                            <button class="carousel-control-prev"
+                                                                    href="#carouselListCourseOutstanding1" role="button"
+                                                                    data-slide="prev"
+                                                                    style="font-size:25px;border-radius: 48px;background: #FFF;box-shadow: 0 6.28195px 37.69169px 0 rgba(0, 0, 0, 0.12);">
+                                                                ❮
+                                                            </button>
+                                                            <button class="carousel-control-next"
+                                                                    href="#carouselListCourseOutstanding1" role="button"
+                                                                    data-slide="next"
+                                                                    style="font-size:25px;border-radius: 48px;background: #FFF;box-shadow: 0 6.28195px 37.69169px 0 rgba(0, 0, 0, 0.12);">
+                                                                ❯
+                                                            </button>
+                                                        </div>
+                                                    {{/courses.hiddenbuttonnext}}
+                                                {{/courses.html}}
+                                                <div id="carouselListCourseOutstanding1" data-interval="false"
+                                                     class="carouselListCourseOutstanding custom-carousel-mycourse carousel slide"
+                                                     data-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        {{#courses.html}}
+                                                            {{{courses.html}}}
+                                                        {{/courses.html}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mycourse-list-lg">
+                                                {{#courses.html}}
+                                                    {{#courses.hiddenbuttonnext2}}
+                                                        <div class="carousel-controls" style="top:38%">
+                                                            <button class="carousel-control-prev"
+                                                                    href="#carouselListCourseOutstanding2" role="button"
+                                                                    data-slide="prev"
+                                                                    style="font-size:25px;border-radius: 48px;background: #FFF;box-shadow: 0 6.28195px 37.69169px 0 rgba(0, 0, 0, 0.12);">
+                                                                ❮
+                                                            </button>
+                                                            <button class="carousel-control-next"
+                                                                    href="#carouselListCourseOutstanding2" role="button"
+                                                                    data-slide="next"
+                                                                    style="font-size:25px;border-radius: 48px;background: #FFF;box-shadow: 0 6.28195px 37.69169px 0 rgba(0, 0, 0, 0.12);">
+                                                                ❯
+                                                            </button>
+                                                        </div>
+                                                    {{/courses.hiddenbuttonnext2}}
+                                                {{/courses.html}}
+                                                <div id="carouselListCourseOutstanding2" data-interval="false"
+                                                     class="carouselListCourseOutstanding custom-carousel-mycourse carousel slide"
+                                                     data-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        {{#courses.html2}}
+                                                            {{{courses.html2}}}
+                                                        {{/courses.html2}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mycourse-list-md">
+                                                {{#courses.html}}
+                                                    {{#courses.hiddenbuttonnext3}}
+                                                        <div class="carousel-controls" style="top:38%">
+                                                            <button class="carousel-control-prev"
+                                                                    href="#carouselListCourseOutstanding3" role="button"
+                                                                    data-slide="prev"
+                                                                    style="font-size:25px;border-radius: 48px;background: #FFF;box-shadow: 0 6.28195px 37.69169px 0 rgba(0, 0, 0, 0.12);">
+                                                                ❮
+                                                            </button>
+                                                            <button class="carousel-control-next"
+                                                                    href="#carouselListCourseOutstanding3" role="button"
+                                                                    data-slide="next"
+                                                                    style="font-size:25px;border-radius: 48px;background: #FFF;box-shadow: 0 6.28195px 37.69169px 0 rgba(0, 0, 0, 0.12);">
+                                                                ❯
+                                                            </button>
+                                                        </div>
+                                                    {{/courses.hiddenbuttonnext3}}
+                                                {{/courses.html}}
+                                                <div id="carouselListCourseOutstanding3" data-interval="false"
+                                                     class="carouselListCourseOutstanding custom-carousel-mycourse carousel slide"
+                                                     data-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        {{#courses.html3}}
+                                                            {{{courses.html3}}}
+                                                        {{/courses.html3}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+                <div class="custom-homepage-feature-blog position-relative d-flex flex-column flex-md-row">
+                    <div class="d-flex flex-column custom-feature-big">
+                        <p class="big-title">NỀN TẢNG GIÁO DỤC ĐÀO TẠO SỐ</p>
+                        <p class="big-title-des">Website cung cấp các chức năng, thông tin giải pháp, dễ dàng sử
+                            dụng</p>
+                        <img src="{{publicimage}}/img_705x590.png" alt="" class="image"/>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row custom-feature-list">
+                        <div class="d-flex flex-column flex-md-row" style="gap: 2vw">
+                            <div style="margin-top:40px;flex-direction: column;display: flex;flex-basis: 48%;gap: 2vw;">
+                                <div class="d-flex flex-row flex-md-column custom-feature-div w-100">
+                                    <img src="{{publicimage}}/home/icon.png" alt=""/>
+                                    <div class="d-flex flex-column">
+                                        <p class="feature-title mb-0 text-center"> Hồ sơ học tập </p>
+                                        <p class="feature-description">Tổng hợp, thống kê, tích điểm, xếp hạng và theo
+                                            dõi quá trình học tập theo từng khóa
+                                            học</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-md-column custom-feature-div w-100">
+                                    <img src="{{publicimage}}/home/icontouch.png" alt=""/>
+                                    <div class="d-flex flex-column">
+                                        <p class="feature-title mb-0 text-center">Kết nối cộng đồng</p>
+                                        <p class="feature-description">
+                                            Phát triển mạng lưới hợp tác giữa các trường đào tạo nghề, doanh nghiệp và
+                                            các tổ chức quốc tế trong lĩnh vực giáo dục số, nhằm chia sẻ kiến thức,
+                                            kinh nghiệm và tăng cường hợp tác trong đào tạo nghề.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="flex-direction: column;display: flex;flex-basis: 48%;gap: 2vw;">
+                                <div class="d-flex flex-row flex-md-column custom-feature-div w-100">
+                                    <img src="{{publicimage}}/home/iconconnect.png" alt=""/>
+                                    <div class="d-flex flex-column">
+                                        <p class="feature-title mb-0 text-center">
+                                            Tương tác trực tiếp
+                                        </p>
+                                        <p class="feature-description">
+                                            Học viên có thể tương tác trực tiếp trên các thiết bị di động, máy tính với
+                                            giảng viên trong quá trình học tập
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-md-column custom-feature-div w-100">
+                                    <img src="{{publicimage}}/home/iconknowledge.png" alt=""/>
+                                    <div class="d-flex flex-column">
+                                        <p class="feature-title mb-0 text-center">
+                                            Học liệu đa dạng, phong phú
+                                        </p>
+                                        <p class="feature-description">
+                                            Học liệu của nền tảng được xây dựng phong phú theo nhiều lĩnh vực, tiêu
+                                            chuẩn học liệu đáp ứng theo hệ thống LMS
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--            <div style="position:relative;margin-top: -4%">-->
+            <!--                <img src="{{publicimage}}/home/bg-4.png" alt="" style="position: absolute;width: 100%"/>-->
+            <!--                <div class="custom-homepage-outstanding">-->
+            <!--                    <div class="text-center">-->
+            <!--                        <p class="custom-title mb-0">Khóa học nổi bật</p>-->
+            <!--                        <p class="custom-title-des">Chúng tôi cung cấp hệ thống học đa dạng ngành nghề trong nhiều lĩnh-->
+            <!--                            vực khác nhau</p>-->
+            <!--                    </div>-->
+            <!--                    <div class="list-course" style="">-->
+                <!--                        {{#courses}}-->
+            <!--                            <a href="{{url}}">-->
+            <!--                                <img src="{{courseimage}}" alt=""/>-->
+            <!--                            </a>-->
+                <!--                        {{/courses}}-->
+
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <div style="position:relative;margin-top:-4%">
+                <img src="{{publicimage}}/home/Group 512790.png" alt="" style="position: absolute;width: 100%"/>
+                <div class="custom-homepage-student-comment">
+                    <p class="comment-bigtitle">Đánh giá khóa học</p>
+                    <p class="comment-bigtitle-des">Hơn 5000 học viên tham gia khóa học</p>
+                    <div class="hidden-md">
+                        <div class="carousel-controls">
+                            <button class="carousel-control-prev" href="#customHomepageSudentCommentListDesktop"
+                                    role="button" data-slide="prev">
+                                ❮
+                            </button>
+                            <button class="carousel-control-next" href="#customHomepageSudentCommentListDesktop"
+                                    role="button" data-slide="next">
+                                ❯
+                            </button>
+                        </div>
+                        <div id="customHomepageSudentCommentListDesktop" class="carousel slide
+                        custom-homepage-student-comment-carousel" data-ride="carousel" data-interval="false">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="d-flex">
+                                        <div class="comment-div col-4">
+                                            <div class="d-flex flex-row" style="gap:27px;">
+                                                <img src="{{publicimage}}/home/studentcomment/image1.png" alt=""
+                                                     class="comment-image"/>
+                                                <div>
+                                                    <p class="comment-title ">Nguyễn Ngọc Hoàn</p>
+                                                    <p class="comment-button"> Học viên</p>
+                                                </div>
+                                            </div>
+                                            <p class="comment-des">Các giảng viên đều nhiệt tình trong giảng dạy. Giáo
+                                                trình của VTC giúp mình khoảng thời gian đầu đi làm không gặp quá nhiều
+                                                khó khăn hay bỡ ngỡ. Gần như các công việc mình đều làm được hoàn
+                                                chỉnh.</p>
+                                            <a class="float-right  comment-view-course"> Xem khóa học <i
+                                                    class="fa-solid fa-right-long"></i></a>
+                                        </div>
+                                        <div class="comment-div col-4">
+                                            <div class="d-flex flex-row" style="gap:27px;">
+                                                <img src="{{publicimage}}/home/studentcomment/image2.png" alt=""
+                                                     class="comment-image"/>
+                                                <div>
+                                                    <p class="comment-title ">Phạm Tuấn Anh</p>
+                                                    <p class="comment-button" style="background: rgba(189, 0, 220, 0.1);
+                                                    color: rgba(220, 0, 255, 1);"> Cử nhân</p>
+                                                </div>
+                                            </div>
+                                            <p class="comment-des">Học xong khóa trên nền tảng mình nắm bắt các kiến
+                                                thức cơ bản. Có tư duy rõ ràng hơn. Gần như các bài học bám sát với thực
+                                                tế. Giảng viên nhiệt tình. Nền tảng dễ dàng sử dụng và tìm kiếm.</p>
+                                            <a class="float-right  comment-view-course"> Xem khóa học <i
+                                                    class="fa-solid fa-right-long"></i></a>
+                                        </div>
+                                        <div class="comment-div col-4">
+                                            <div class="d-flex flex-row" style="gap:27px;">
+                                                <img src="{{publicimage}}/home/studentcomment/image3.png" alt=""
+                                                     class="comment-image"/>
+                                                <div>
+                                                    <p class="comment-title">Lê Tuấn Hưng</p>
+                                                    <p class="comment-button"
+                                                       style="background: rgba(94, 225, 171, 0.26); color: rgba(0, 153, 89, 1);">
+                                                        Nông dân</p>
+                                                </div>
+                                            </div>
+                                            <p class="comment-des">Khoá học đã giúp tôi trang bị các kiến thức cơ bản
+                                                khi bắt đầu một công việc mới.  Nội dung đào tạo trình bày dễ hiểu,
+                                                tình huống hướng dẫn đa dạng, phong phú. Rất cảm ơn VTC cùng đội ngũ
+                                                giảng viên nhiệt tình, trí tuệ.</p>
+                                            <a class="float-right comment-view-course"> Xem khóa học <i
+                                                    class="fa-solid fa-right-long"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden-lg mb-3">
+                        <div id="customHomepageSudentCommentList"
+                             class="carousel slide custom-homepage-student-comment-list" data-ride="carousel"
+                             data-interval="false">
+                            <ol class="carousel-indicators" style="margin-bottom: 0">
+                                <li data-target="#customHomepageSudentCommentList" data-slide-to="0"
+                                    class="active"></li>
+                                <li data-target="#customHomepageSudentCommentList" data-slide-to="1"></li>
+                                <li data-target="#customHomepageSudentCommentList" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="comment-div">
+                                        <div class="d-flex flex-row" style="gap:27px;">
+                                            <img src="{{publicimage}}/home/studentcomment/image1.png" alt=""
+                                                 class="comment-image"/>
+                                            <div>
+                                                <p class="comment-title ">Nguyễn Ngọc Hoàn</p>
+                                                <p class="comment-button"> Học viên</p>
+                                            </div>
+                                        </div>
+                                        <p class="comment-des">Các giảng viên đều nhiệt tình trong giảng dạy. Giáo
+                                            trình của VTC giúp mình khoảng thời gian đầu đi làm không gặp quá nhiều
+                                            khó khăn hay bỡ ngỡ. Gần như các công việc mình đều làm được hoàn
+                                            chỉnh.</p>
+                                        <a class="float-right comment-view-course"> Xem khóa học <i
+                                                class="fa-solid fa-right-long"></i></a>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="comment-div">
+                                        <div class="d-flex flex-row" style="gap:27px;">
+                                            <img src="{{publicimage}}/home/studentcomment/image2.png" alt=""
+                                                 class="comment-image"/>
+                                            <div>
+                                                <p class="comment-title ">Phạm Tuấn Anh</p>
+                                                <p class="comment-button" style="background: rgba(189, 0, 220, 0.1);
+                                                    color: rgba(220, 0, 255, 1);">Cử nhân</p>
+                                            </div>
+                                        </div>
+                                        <p class="comment-des">Học xong khóa trên nền tảng mình nắm bắt các kiến
+                                            thức cơ bản. Có tư duy rõ ràng hơn. Gần như các bài học bám sát với thực
+                                            tế. Giảng viên nhiệt tình. Nền tảng dễ dàng sử dụng và tìm kiếm.</p>
+                                        <a class="float-right comment-view-course"> Xem khóa học <i
+                                                class="fa-solid fa-right-long"></i></a>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="comment-div">
+                                        <div class="d-flex flex-row" style="gap:27px;">
+                                            <img src="{{publicimage}}/home/studentcomment/image3.png" alt=""
+                                                 class="comment-image"/>
+                                            <div>
+                                                <p class="comment-title ">Lê Tuấn Hưng</p>
+                                                <p class="comment-button"
+                                                   style="background: rgba(94, 225, 171, 0.26); color: rgba(0, 153, 89, 1);">
+                                                    Nông dân</p>
+                                            </div>
+                                        </div>
+                                        <p class="comment-des">Các giảng viên đều nhiệt tình trong giảng dạy. Giáo
+                                            trình của VTC giúp mình khoảng thời gian đầu đi làm không gặp quá nhiều
+                                            khó khăn hay bỡ ngỡ. Gần như các công việc mình đều làm được hoàn
+                                            chỉnh.</p>
+                                        <a class="float-right comment-view-course"> Xem khóa học <i
+                                                class="fa-solid fa-right-long"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        <div id="topofscroll">-->
+        <!--            <div id="page-content" class="d-print-block main-inner">-->
+        <!--                <div id="region-main-box">-->
+        <!--                    <section id="region-main" aria-label="{{#str}}content{{/str}}">-->
+        <!--                        {{{ output.course_content_header }}}-->
+        <!--                        {{{ output.main_content }}}-->
+        <!--                        {{{ output.course_content_footer }}}-->
+        <!--                    </section>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+
+
+        {{> theme_moove/footer }}
+    </div>
+</div>
+
+</body>
+<script>
+    $(document).ready(function () {
+        const animate = (node, target, duration) => {
+            let start = performance.now();
+            const update = () => {
+                let x = (performance.now() - start) / (duration * 1000);
+                if (x > 1) x = 1;
+                x = (x === 1 ? 1 : 1 - Math.pow(2, -10 * x));
+                node.text(new Intl.NumberFormat().format(Math.floor(target * x)));
+                if (x < 1)
+                    requestAnimationFrame(() => update());
+            }
+            update();
+        }
+
+        animate($('#infor1'), {{countVisitor}}, 2);
+        animate($('#infor2'), {{countlearned}}, 2);
+        animate($('#infor3'), {{countactivity}}, 2);
+        animate($('#infor4'), {{countteacher}}, 2);
+
+
+    })
+</script>
+</html>
+{{#js}}
+    M.util.js_pending('theme_boost/loader');
+    require(['theme_boost/loader', 'theme_boost/drawer'], function(Loader, Drawer) {
+    Drawer.init();
+    M.util.js_complete('theme_boost/loader');
+    });
+{{/js}}

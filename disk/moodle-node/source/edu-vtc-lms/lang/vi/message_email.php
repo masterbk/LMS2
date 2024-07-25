@@ -1,0 +1,24 @@
+<?php
+$string["email"] = 'Gửi thông báo qua thư điển tử tới';
+$string["emaildigestunreadmessages"] = 'Tin nhắn chưa đọc';
+$string["emaildigestviewallmessages"] = 'Xem tất cả tin nhắn';
+$string["emailonlyfromnoreplyaddress"] = 'Luôn gửi thư điện tử từ địa chỉ không trả lời?';
+$string["ifemailleftempty"] = 'Để trống để gửi thông báo tới {$a}';
+$string["messagedigestemailsubject"] = '{$a}: Thông báo tin nhắn';
+$string["pluginname"] = 'Thư điện tử';
+$string["privacy:metadata:attachment"] = 'Một tập tin trên hệ thống tập tin.';
+$string["privacy:metadata:attachname"] = 'Tên của tệp đính kèm (phần mở rộng cho biết MIME).';
+$string["privacy:metadata:externalpurpose"] = 'Thông tin này được gửi đến máy chủ SMTP bên ngoài để cuối cùng được gửi dưới dạng email đến người nhận.';
+$string["privacy:metadata:fullmessage"] = 'Tin nhắn đầy đủ ở một định dạng nhất định.';
+$string["privacy:metadata:fullmessagehtml"] = 'Phiên bản đầy đủ của tin nhắn.';
+$string["privacy:metadata:message_email_messages"] = 'Danh sách người dùng đăng ký thông qua nhà cung cấp LTI';
+$string["privacy:metadata:message_email_messages:conversationid"] = 'ID của cuộc trò chuyện được gửi tới';
+$string["privacy:metadata:message_email_messages:messageid"] = 'ID của tin nhắn đang được gửi';
+$string["privacy:metadata:message_email_messages:useridto"] = 'ID người dùng nhận tin nhắn';
+$string["privacy:metadata:recipient"] = 'Người nhận tin nhắn.';
+$string["privacy:metadata:replyto"] = 'Địa chỉ thư điện tử để trả lời.';
+$string["privacy:metadata:replytoname"] = 'Tên trả lời cho người nhận.';
+$string["privacy:metadata:subject"] = 'Dòng chủ đề của tin nhắn.';
+$string["privacy:metadata:userfrom"] = 'Người dùng gửi tin nhắn.';
+$string["privacy:preference:email"] = 'Địa chỉ thông báo thư điện tử ưa thích';
+$string["tasksendemail"] = 'Tin nhắn tóm tắt thư';

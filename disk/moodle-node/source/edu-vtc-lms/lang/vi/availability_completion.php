@@ -1,0 +1,24 @@
+<?php
+$string["cachedef_previous_cache"] = 'Thông tin phụ thuộc hoạt động trước đó';
+$string["description"] = 'Yêu cầu học sinh hoàn thành (hoặc không hoàn thành) một hoạt động khác.';
+$string["error_selectcmid"] = 'Bạn phải chọn một hoạt động cho điều kiện hoàn thành.';
+$string["error_selectcmidpassfail"] = 'Bạn phải chọn một hoạt động có bộ điều kiện hoàn thành \"Yêu cầu điểm\".';
+$string["label_cm"] = 'Hoạt động hoặc tài nguyên';
+$string["label_completion"] = 'Trạng thái hoàn thành bắt buộc';
+$string["missing"] = '(Thiếu hoạt động)';
+$string["option_previous"] = 'Hoạt động trước đó đã hoàn thành';
+$string["pluginname"] = 'Hạn chế bằng cách hoàn thành hoạt động';
+$string["requires_incomplete"] = 'Hoạt động <strong>{$a}</strong> không đầy đủ';
+$string["requires_complete"] = 'Hoạt động <strong>{$a}</strong> được đánh dấu là hoàn thành';
+$string["requires_complete_pass"] = 'Hoạt động <strong>{$a}</strong> đã hoàn thành và được thông qua';
+$string["requires_complete_fail"] = 'Hoạt động <strong>{$a}</strong> đã hoàn thành và thất bại';
+$string["requires_not_complete_pass"] = 'Hoạt động <strong>{$a}</strong> chưa hoàn thành và đã được thông qua';
+$string["requires_not_complete_fail"] = 'Hoạt động <strong>{$a}</strong> chưa hoàn thành và thất bại';
+$string["requires_previous_incomplete"] = 'Các <strong>hoạt động trước đó đã hoàn thành</strong> không đầy đủ';
+$string["requires_previous_complete"] = 'Các <strong>hoạt động trước đó đã hoàn thành</strong> được đánh dấu là hoàn thành';
+$string["requires_previous_complete_pass"] = 'Các <strong>hoạt động trước đó đã hoàn thành</strong> đã hoàn thành và được thông qua';
+$string["requires_previous_complete_fail"] = 'Các <strong>hoạt động trước đó đã hoàn thành</strong> đã hoàn thành và thất bại';
+$string["requires_previous_not_complete_pass"] = 'Các <strong>hoạt động trước đó đã hoàn thành</strong> chưa hoàn thành và đã được thông qua';
+$string["requires_previous_not_complete_fail"] = 'Các <strong>hoạt động trước đó đã hoàn thành</strong> chưa hoàn thành và thất bại';
+$string["title"] = 'Hoàn thành hoạt động';
+$string["privacy:metadata"] = 'Plugin Hạn chế theo hoạt động hoàn thành không lưu trữ bất kỳ dữ liệu cá nhân nào.';

@@ -1,0 +1,202 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template message_popup/notification_popover
+
+    This template will render the notification popover for the navigation bar.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * All data attributes are required
+
+    Context variables required for this template:
+    * userid the logged in user id
+    * urls The URLs for the popover
+
+    Example context (json):
+    {
+        "userid": 3,
+        "urls": {
+            "preferences": "http://www.moodle.com"
+        }
+    }
+
+}}
+{{< core/popover_region }}
+    {{$classes}}popover-region-notifications{{/classes}}
+    {{$attributes}}id="nav-notification-popover-container" data-userid="{{userid}}"{{/attributes}}
+
+    {{$togglelabel}}{{!
+        }}{{^unreadcount}} {{#str}} shownotificationwindownonew, message {{/str}} {{/unreadcount}} {{!
+        }}{{#unreadcount}} {{#str}} shownotificationwindowwithcount, message, {{.}} {{/str}} {{/unreadcount}} {{!
+    }}{{/togglelabel}}
+    {{$togglecontent}}
+<!--        <i class="icon fa-regular fa-bell" title="{{#str}} togglenotificationmenu, message {{/str}}"></i>-->
+
+        <style>
+            .number-of-notification {
+                border-radius: 100% !important;
+                width: 18px;
+                height: 18px;
+                top: 30px !important;
+                right: 6px !important;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+            }
+            .number-of-notification[data-count="3"] {
+                width: 18px;
+                height: 20px;
+            }
+            @media only screen and (max-width: 900px) {
+                .icon-notification {
+                    width: 24px;
+                    height: 25px;
+                }
+                .number-of-notification {
+                    width: 13px;
+                    height: 13px;
+                    top: 37px !important;
+                    right: 6px !important;
+                    font-size: 7px !important;
+                }
+                .number-of-notification[data-count="3"] {
+                    height: 15px;
+                    top: 35px !important;
+                    right: 2px !important;
+                }
+            }
+            @media only screen and (max-width: 768px) {
+                .icon-notification {
+                    width: 23px;
+                    height: 24px;
+                }
+                .number-of-notification {
+                    width: 13px;
+                    height: 13px;
+                    top: 37px !important;
+                    right: 6px !important;
+                    font-size: 7px !important;
+                }
+                .number-of-notification[data-count="3"] {
+                    height: 15px;
+                    top: 35px !important;
+                    right: 2px !important;
+                }
+            }
+
+            @media only screen and (max-width: 600px) {
+                .icon-notification {
+                    width: 20px;
+                    height: 21px;
+                }
+                .number-of-notification {
+                    width: 12px;
+                    height: 12px;
+                    top: 37px !important;
+                    right: 6px !important;
+                    font-size: 7px !important;
+                }
+                .number-of-notification[data-count="3"] {
+                    height: 15px;
+                    top: 34px !important;
+                    right: 0 !important;
+                }
+            }
+            @media only screen and (max-width: 450px) {
+                .icon-notification {
+                    width: 18px;
+                    height: 19px;
+                }
+                .number-of-notification {
+                    width: 12px;
+                    height: 12px;
+                    top: 22px !important;
+                    right: 6px !important;
+                    font-size: 7px !important;
+                }
+                .number-of-notification[data-count="3"] {
+                    height: 13px;
+                    top: 22px !important;
+                    right: 0 !important;
+                }
+            }
+        </style>
+
+        <svg class="icon-notification" title="{{#str}} togglenotificationmenu, message {{/str}}" width="32" height="31" viewBox="0 0 32 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M24.9431 11.7283C24.9431 13.4029 25.3857 14.3899 26.3597 15.5273C27.0978 16.3653 27.3337 17.4409 27.3337 18.6079C27.3337 19.7735 26.9507 20.88 26.1834 21.7784C25.179 22.8554 23.7624 23.543 22.3166 23.6625C20.2216 23.8411 18.1252 23.9915 16.001 23.9915C13.8755 23.9915 11.7804 23.9015 9.68533 23.6625C8.23827 23.543 6.82168 22.8554 5.81855 21.7784C5.05129 20.88 4.66699 19.7735 4.66699 18.6079C4.66699 17.4409 4.90419 16.3653 5.64098 15.5273C6.64544 14.3899 7.05889 13.4029 7.05889 11.7283V11.1602C7.05889 8.91762 7.6181 7.4512 8.76965 6.01565C10.4817 3.9221 13.2261 2.6665 15.9414 2.6665H16.0606C18.8342 2.6665 21.6673 3.98253 23.3503 6.16606C24.4422 7.57206 24.9431 8.97671 24.9431 11.1602V11.7283ZM12.0986 26.7476C12.0986 26.0762 12.7148 25.7687 13.2846 25.6371C13.9511 25.496 18.0127 25.496 18.6792 25.6371C19.2491 25.7687 19.8653 26.0762 19.8653 26.7476C19.8321 27.3868 19.4571 27.9535 18.939 28.3134C18.2671 28.8371 17.4787 29.1688 16.6544 29.2884C16.1986 29.3474 15.7507 29.3488 15.3107 29.2884C14.4852 29.1688 13.6967 28.8371 13.0262 28.3121C12.5067 27.9535 12.1317 27.3868 12.0986 26.7476Z" fill="black"/>
+        </svg>
+        <div
+            class="number-of-notification count-container {{^unreadcount}}hidden{{/unreadcount}} "
+            data-region="count-container"
+            aria-hidden=true
+            data-value="{{unreadcount}}"
+        >
+            {{unreadcount}}
+        </div>
+        <script>
+            // Lấy giá trị từ thuộc tính data-value của thẻ div
+            const notificationCircle = document.querySelector(".number-of-notification");
+            const dataValue = notificationCircle.getAttribute("data-value");
+            // Tính số lượng chữ số trong giá trị
+            const numberOfDigits = dataValue.length;
+            notificationCircle.setAttribute("data-count", numberOfDigits);
+        </script>
+    {{/togglecontent}}
+
+    {{$containerlabel}}{{#str}} notificationwindow, message {{/str}}{{/containerlabel}}
+
+    {{$headertext}}{{#str}} notifications, message {{/str}}{{/headertext}}
+    {{$headeractions}}
+        <a class="mark-all-read-button"
+           href="#"
+           title="{{#str}} markallread {{/str}}"
+           data-action="mark-all-read"
+           role="button"
+           aria-label="{{#str}} markallread {{/str}}">
+            <span class="normal-icon">{{#pix}} t/markasread, core {{/pix}}</span>
+            {{> core/loading }}
+        </a>
+        {{# urls.preferences }}
+            <a href="{{{ . }}}"
+               title="{{#str}} notificationpreferences, message {{/str}}"
+               aria-label="{{#str}} notificationpreferences, message {{/str}}">
+                {{#pix}} i/settings, core {{/pix}}</a>
+        {{/ urls.preferences }}
+    {{/headeractions}}
+
+    {{$content}}
+        <div class="all-notifications"
+            data-region="all-notifications"
+            role="log"
+            aria-busy="false"
+            aria-atomic="false"
+            aria-relevant="additions"></div>
+        <div class="empty-message" tabindex="0" data-region="empty-message">{{#str}} nonotifications, message {{/str}}</div>
+    {{/content}}
+{{/ core/popover_region }}
+{{#js}}
+require(['jquery', 'message_popup/notification_popover_controller'], function($, Controller) {
+    var container = $('#nav-notification-popover-container');
+    var controller = new Controller(container);
+    controller.registerEventListeners();
+    controller.registerListNavigationEventListeners();
+});
+{{/js}}

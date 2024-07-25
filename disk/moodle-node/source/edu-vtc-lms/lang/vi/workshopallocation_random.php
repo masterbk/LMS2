@@ -1,0 +1,29 @@
+<?php
+$string["addselfassessment"] = 'Thêm phần tự đánh giá';
+$string["allocationaddeddetail"] = 'Đánh giá mới cần thực hiện: <strong>{$a->tên người đánh giá}</strong> là người đánh giá <strong>{$a->tên tác giả}</strong>';
+$string["allocationdeallocategraded"] = 'Không thể phân bổ bài đánh giá đã được chấm điểm: người đánh giá <strong>{$a->tên người đánh giá}</strong>, tác giả gửi <strong>{$a->tên tác giả}</strong>';
+$string["allocationreuseddetail"] = 'Đánh giá tái sử dụng: <strong>{$a->tên người đánh giá}</strong> được giữ làm người đánh giá <strong>{$a->tên tác giả}</strong>';
+$string["allocationsettings"] = 'Cài đặt phân bổ';
+$string["assessmentdeleteddetail"] = 'Đánh giá đã được hủy bỏ: <strong>{$a->tên người đánh giá}</strong> không còn là người đánh giá <strong>{$a->tên tác giả}</strong>';
+$string["assesswosubmission"] = 'Người tham gia có thể đánh giá mà không cần gửi bất cứ điều gì';
+$string["confignumofreviews"] = 'Số lượng bài gửi mặc định được phân bổ ngẫu nhiên';
+$string["excludesamegroup"] = 'Ngăn chặn đánh giá của các đồng nghiệp trong cùng một nhóm';
+$string["noallocationtoadd"] = 'Không có phân bổ để thêm';
+$string["nogroupusers"] = '<p>Cảnh báo: Nếu hội thảo ở chế độ \'nhóm hiển thị\' hoặc chế độ \'nhóm riêng biệt\' thì người dùng PHẢI là thành viên của ít nhất một nhóm để được công cụ này phân bổ các đánh giá ngang hàng cho họ. </p>
+<p>Những người dùng này hiện không thuộc nhóm: {$a}</p>';
+$string["numofdeallocatedassessment"] = 'Đang phân bổ {$a} bài đánh giá';
+$string["numofrandomlyallocatedsubmissions"] = 'Phân bổ ngẫu nhiên {$a} phân bổ';
+$string["numofreviews"] = 'Số lượng đánh giá';
+$string["numofselfallocatedsubmissions"] = 'Tự phân bổ {$a} bài nộp';
+$string["numperauthor"] = 'mỗi lần gửi';
+$string["numperreviewer"] = 'mỗi người đánh giá';
+$string["pluginname"] = 'Phân bổ ngẫu nhiên';
+$string["privacy:metadata"] = 'Plugin phân bổ ngẫu nhiên không lưu trữ bất kỳ dữ liệu cá nhân nào. ';
+$string["randomallocationdone"] = 'Phân bổ ngẫu nhiên được thực hiện';
+$string["resultnomorepeers"] = 'Không còn đồng nghiệp nào nữa';
+$string["resultnomorepeersingroup"] = 'Không có thêm đồng nghiệp nào trong nhóm riêng biệt này';
+$string["resultnotenoughpeers"] = 'Không có đủ đồng nghiệp có sẵn';
+$string["resultnumperauthor"] = 'Đang cố gắng phân bổ {$a} bài đánh giá cho mỗi tác giả';
+$string["resultnumperreviewer"] = 'Đang cố gắng phân bổ {$a} bài đánh giá cho mỗi người đánh giá';
+$string["removecurrentallocations"] = 'Xóa phân bổ hiện tại';
+$string["stats"] = 'Thống kê phân bổ hiện tại';

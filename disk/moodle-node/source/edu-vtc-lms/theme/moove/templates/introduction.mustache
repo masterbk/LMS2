@@ -1,0 +1,220 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_moove/drawers
+
+    Boost drawer template.
+
+    Context variables required for this template:
+    * sitename - The name of the site
+    * output - The core renderer for the page
+    * bodyattributes - attributes for the body tag as a string of html attributes
+    * sidepreblocks - HTML for the blocks
+    * hasblocks - true if there are blocks on this page
+    * courseindexopen - true if the nav drawer should be open on page load
+    * regionmainsettingsmenu - HTML for the region main settings menu
+    * hasregionmainsettingsmenu - There is a region main settings menu on this page.
+
+    Example context (json):
+    {
+        "sitename": "Moodle",
+        "output": {
+            "doctype": "<!DOCTYPE html>",
+            "page_title": "Test page",
+            "favicon": "favicon.ico",
+            "main_content": "<h1>Headings make html validators happier</h1>"
+         },
+        "bodyattributes":"",
+        "sidepreblocks": "<h2>Blocks html goes here</h2>",
+        "hasblocks":true,
+        "courseindexopen": true,
+        "navdraweropen": false,
+        "blockdraweropen": true,
+        "regionmainsettingsmenu": "",
+        "hasregionmainsettingsmenu": false,
+        "addblockbutton": ""
+    }
+}}
+{{> theme_moove/head }}
+
+<body {{{ bodyattributes }}}>
+{{> core/local/toast/wrapper}}
+<div id="page-wrapper" class="d-print-block">
+
+    {{{ output.standard_top_of_body_html }}}
+
+    {{> theme_moove/navbar }}
+
+    <div id="page" data-region="mainpage" data-usertour="scroller" class="drawers drag-container bg-white" style="padding:0 !important;">
+        <div class="custom-page-background" >
+            <div class="hidden-md">
+                <div class="custom-vision position-relative" style="z-index: 2">
+                    <img src="{{{publicimage}}}/background.png" alt="" class="position-absolute" style="z-index:1;width: 99vw;background-repeat: no-repeat;background-size: 100%;left: calc(-50vw + 50%);"/>
+
+                    <img src="{{{publicimage}}}/image1-v2.png" class="position-relative" alt="" style="z-index:2;width:36.97vw;height:36.97vw;margin-top: 14.37vw"/>
+                    <div class="position-relative" style="margin-top: 26%;z-index: 2">
+                        <p class="custom-title">Tầm nhìn của nền tảng</p>
+                        <p  class="custom-title-content">
+                            Trở thành nền tảng giáo dục và đào tạo số hàng đầu cho lực lượng lao động phổ thông tại Việt
+                            Nam.
+                            Chúng tôi cam kết xây dựng một nền tảng <span style="color:#1890FF">dạy và học trực tuyến mở, thông minh, hiện đại, linh hoạt, dễ tiếp cận</span>
+                            và <span style="color:#1890FF">có tính tương tác cao</span>, giúp cho người lao động Việt Nam dễ dàng mở rộng kiến
+                            thức, nâng cao kỹ năng và trình độ tay nghề, từ đó phát triển nghề nghiệp trong môi trường
+                            làm việc hiện đại và luôn thay đổi, góp phần phát triển thị trường lao động linh hoạt, hiện
+                            đại, hiệu quả, bền vững và hội nhập.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="hidden-lg position-relative">
+                <img src="{{{publicimage}}}/bg-1-v2.png" alt="" class="position-absolute" style="z-index:1;width: 98vw;object-fit:cover;height:49vw;background-repeat: no-repeat;background-size: 100%;left: calc(-50vw + 50%);"/>
+                <div class="custom-vision position-relative" style="z-index: 2">
+                    <p class="custom-title mb-0" style="margin-top: 13vw">Tầm nhìn của nền tảng</p>
+                    <img src="{{{publicimage}}}/image1.png" alt="" style="width:100%;"/>
+                    <div>
+                        <p class="custom-title-content">
+                            Trở thành nền tảng giáo dục và đào tạo số hàng đầu cho lực lượng lao động phổ thông tại Việt Nam. Chúng tôi cam kết xây dựng một nền tảng <span class="color:#1890FF">dạy và học trực tuyến mở, thông minh, hiện đại, linh hoạt, dễ tiếp cận</span>và <span class="color:#1890FF">có tính tương tác cao</span>, giúp cho người lao động Việt Nam dễ dàng mở rộng kiến thức, nâng cao kỹ năng và trình độ tay nghề, từ đó phát triển nghề nghiệp trong môi trường làm việc hiện đại và luôn thay đổi, góp phần phát triển thị trường lao động linh hoạt, hiện đại, hiệu quả, bền vững và hội nhập.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="custom-mission" style="margin-top: 8%">
+                <p class="custom-title" style="margin: 2.01vw 0">Sứ mệnh của chúng tôi</p>
+                <p class="custom-content" >Đồng hành cùng lực lượng lao động phổ thông để thích ứng với yêu cầu ngày càng cao và thay đổi nhanh của thị trường lao động</p>
+                <div style="position: relative">
+                    <img src="{{{publicimage}}}/Group 21.png" alt="" class="image-banner-extra" style="">
+                    <div class="image-banner-main" id="video-container" style="background-image: url('{{{publicimage}}}/video.jpg');">
+                        <a id="play-video" class="video-play-button" href="#">
+                            <span></span>
+                        </a>
+                        <div id="video-overlay" class="video-overlay">
+                            <a class="video-overlay-close">&times;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-target hidden-md position-relative">
+                <img src="{{publicimage}}/bg-2-v2.png" style="bottom:0;width: 99vw;position: absolute;left: calc(-50vw + 50%);background-size: 100% 100%;background-repeat: no-repeat;"/>
+                <div style="padding: 22vw 7vw 11vw 52vw;position: relative;z-index: 2; margin-top: 60px">
+                    <p class="custom-target-title">Mục tiêu nền tảng</p>
+                    <p class="custom-target-content"> Website cung cấp các chức năng, thông tin giải pháp, dễ dàng sử dụng</p>
+                    <ul class="list-target d-flex flex-column" style="gap:10px">
+                        <li>
+                            <i><img src="{{{publicimage}}}/check.svg"/> </i>Đưa học tập đến mọi lúc, mọi nơi thông qua
+                            nền tảng giáo dục, đào tạo số
+                        </li>
+                        <li>
+                            <i><img src="{{{publicimage}}}/check.svg" alt=""/> </i>
+                            Nâng cao trình độ kiến thức, kỹ năng và nhận
+                            thức của nông dân, công nhân, lao động dịch vụ
+                        </li>
+                        <li>
+                            <i><img src="{{{publicimage}}}/check.svg"/> </i>Cung cấp học liệu số tương tác, đơn giản và
+                            dễ tiếp cận
+                        </li>
+                        <li>
+                            <i><img src="{{{publicimage}}}/check.svg"/> </i>Tạo ra cơ hội phát triển nghề nghiệp và cải
+                            thiện điều kiện sống cho đối tượng tham gia
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="custom-target hidden-lg" style="width: 95%;margin: auto;margin-top: 40px">
+                <p class="custom-target-title mb-0">Mục tiêu nền tảng</p>
+                <p class="custom-target-content" > Website cung cấp các chức năng, thông tin giải pháp, dễ dàng sử dụng</p>
+                <div class="text-center">
+                    <img src="{{publicimage}}/target-v2.png" style="width: 70%"/>
+
+                </div>
+                <div style="">
+                    <ul class="list-target" style="display: grid;grid-template-columns: repeat(2, minmax(0, 1fr));">
+                        <li class="d-flex flex-row">
+                            <i style="width: 20%"><img src="{{{publicimage}}}/check.svg" alt="" style="width: 75%"/> </i>
+                            <p style="width: 80%">Đưa học tập đến mọi lúc, mọi nơi thông qua
+                                nền tảng giáo dục, đào tạo số</p>
+                        </li>
+                        <li class="d-flex flex-row">
+                            <i style="width: 20%"><img src="{{{publicimage}}}/check.svg" alt="" style="width: 75%"/> </i>
+                            <p style="width: 80%">Nâng cao trình độ kiến thức, kỹ năng và nhận
+                                thức của nông dân, công nhân, lao động dịch vụ</p>
+                        </li>
+                        <li class="d-flex flex-row">
+                            <i style="width: 20%"><img src="{{{publicimage}}}/check.svg" alt="" style="width: 75%"/> </i>
+                            <p style="width: 80%">Cung cấp học liệu số tương tác, đơn giản và
+                                dễ tiếp cận</p>
+                        </li>
+                        <li class="d-flex flex-row">
+                            <i style="width: 20%"><img src="{{{publicimage}}}/check.svg" alt="" style="width: 75%"/> </i>
+                            <p style="width: 80%">Tạo ra cơ hội phát triển nghề nghiệp và cải
+                            thiện điều kiện sống cho đối tượng tham gia
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--        <div id="topofscroll">-->
+        <!--            <div id="page-content" class="d-print-block main-inner">-->
+        <!--                <div id="region-main-box">-->
+        <!--                    <section id="region-main" aria-label="{{#str}}content{{/str}}">-->
+        <!--                        {{{ output.course_content_header }}}-->
+        <!--                        {{{ output.main_content }}}-->
+        <!--                        {{{ output.course_content_footer }}}-->
+        <!--                    </section>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+
+        {{> theme_moove/footer }}
+    </div>
+    {{{ output.standard_after_main_region_html }}}
+</div>
+<script>
+    $(document).ready(function () {
+        $('#play-video').on('click', function(e){
+            e.preventDefault();
+            $('#video-container').css('background-image')
+            $('#video-overlay').addClass('open');
+            $("#video-overlay").append('<iframe width=100% height=auto src="https://www.youtube.com/embed/Wv2kBtWint8?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>');
+        });
+
+        $('.video-overlay, .video-overlay-close').on('click', function(e){
+            e.preventDefault();
+            close_video();
+        });
+
+        $(document).keyup(function(e){
+            if(e.keyCode === 27) { close_video().click; }
+        });
+
+        function close_video() {
+            $('.video-overlay.open').removeClass('open').find('iframe').remove();
+        }
+    });
+</script>
+</body>
+</html>
+{{#js}}
+    M.util.js_pending('theme_boost/loader');
+    require(['theme_boost/loader', 'theme_boost/drawer'], function(Loader, Drawer) {
+    Drawer.init();
+    M.util.js_complete('theme_boost/loader');
+    });
+{{/js}}

@@ -1,0 +1,325 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template format_vtc/local/content
+
+    Displays the complete course format.
+
+    Example context (json):
+    {
+        "initialsection": {
+                "num": 0,
+                "id": 34,
+                "cmlist": {
+                    "cms": [
+                        {
+                            "cmitem": {
+                                "cmformat": {
+                                    "cmname": "<a class=\"aalink\" href=\"#\"><span class=\"instancename\">Forum example</span></a>",
+                                    "hasname": "true"
+                                },
+                                "id": 3,
+                                "cmid": 3,
+                                "module": "forum",
+                                "extraclasses": "newmessages",
+                                "anchor": "module-3"
+                            }
+                        }
+                    ],
+                    "hascms": true
+                },
+                "iscurrent": true,
+                "summary": {
+                    "summarytext": "Summary text!"
+                }
+            },
+        "sections": [
+            {
+                "num": 1,
+                "id": 35,
+                "header": {
+                    "name": "Section title",
+                    "url": "#"
+                },
+                "cmlist": {
+                    "cms": [
+                        {
+                            "cmitem": {
+                                "cmformat": {
+                                    "cmname": "<a class=\"aalink\" href=\"#\"><span class=\"instancename\">Another forum</span></a>",
+                                    "hasname": "true"
+                                },
+                                "id": 4,
+                                "cmid": 4,
+                                "module": "forum",
+                                "extraclasses": "newmessages",
+                                "anchor": "module-4"
+                            }
+                        }
+                    ],
+                    "hascms": true
+                },
+                "iscurrent": true,
+                "summary": {
+                    "summarytext": "Summary text!"
+                }
+            },
+            {
+                "num": 4,
+                "id": 36,
+                "header": {
+                    "name": "Section 2 title",
+                    "url": "#"
+                },
+                "cmlist": {
+                    "cms": [
+                        {
+                            "cmitem": {
+                                "cmformat": {
+                                    "cmname": "<a class=\"aalink\" href=\"#\"><span class=\"instancename\">Forum example</span></a>",
+                                    "hasname": "true"
+                                },
+                                "id": 5,
+                                "cmid": 5,
+                                "module": "forum",
+                                "extraclasses": "newmessages",
+                                "anchor": "module-5"
+                            }
+                        }
+                    ],
+                    "hascms": true
+                },
+                "iscurrent": true,
+                "summary": {
+                    "summarytext": "Summary text!"
+                }
+            }
+        ],
+        "format": "topics",
+        "title": "Course title example",
+            "hasnavigation": true,
+            "sectionnavigation": {
+            "hasprevious": true,
+            "previousurl": "#",
+            "larrow": "&#x25C4;",
+            "previousname": "Section 3",
+            "hasnext": true,
+            "rarrow": "&#x25BA;",
+            "nexturl": "#",
+            "nextname": "Section 5"
+        },
+        "sectionselector": {
+            "hasprevious": true,
+            "previousurl": "#",
+            "larrow": "&#x25C4;",
+            "previousname": "Section 3",
+            "hasnext": true,
+            "rarrow": "&#x25BA;",
+            "nexturl": "#",
+            "nextname": "Section 5",
+            "selector": "<select><option>Section 4</option></select>"
+        },
+        "sectionreturn": 1,
+        "singlesection": {
+            "num": 5,
+            "id": 37,
+            "header": {
+                "name": "Single Section Example",
+                "url": "#"
+            },
+            "cmlist": {
+                "cms": [
+                    {
+                        "cmitem": {
+                            "cmformat": {
+                                "cmname": "<a class=\"aalink\" href=\"#\"><span class=\"instancename\">Assign example</span></a>",
+                                "hasname": "true"
+                            },
+                            "id": 6,
+                            "cmid": 6,
+                            "module": "assign",
+                            "extraclasses": "",
+                            "anchor": "module-6"
+                        }
+                    }
+                ],
+                "hascms": true
+            },
+            "iscurrent": true,
+            "summary": {
+                "summarytext": "Summary text!"
+            }
+        }
+    }
+}}
+<div id="course-format-{{uniqid}}" class="custom-content-div" style="">
+    <h2 class="accesshide">{{{title}}}</h2>
+    {{{completionhelp}}}
+    <div class="hidden-md" style="background:#FFF;box-shadow: 0 4px 25px 0 rgba(0, 96, 173, 0.10);border-radius: 20px;">
+        <div class="custom-course" >
+            <div class="custom-list-activity" style="flex-basis:50%;height: 100%">
+                <ul class="{{format}}" data-for="course_sectionlist">
+                    <p class="cutom-p-no-margin font-weight-bold" style="color:black;font-size: 20px">
+                        {{#str}}listactivity,theme_moove{{/str}}
+                    </p>
+                    {{#initialsection}}
+                        {{$ format_vtc/local/content/section }}
+                            {{> format_vtc/local/content/section }}
+                        {{/ format_vtc/local/content/section }}
+                    {{/initialsection}}
+                    {{#sections}}
+                        {{$ format_vtc/local/content/section }}
+                            {{> format_vtc/local/content/section }}
+                        {{/ format_vtc/local/content/section }}
+                    {{/sections}}
+                </ul>
+                {{#hasnavigation}}
+                    <div class="single-section">
+                        {{#sectionnavigation}}
+                            {{$ format_vtc/local/content/sectionnavigation }}
+                                {{> format_vtc/local/content/sectionnavigation }}
+                            {{/ format_vtc/local/content/sectionnavigation }}
+                        {{/sectionnavigation}}
+                        <ul class="{{format}}">
+                            {{#singlesection}}
+                                {{$ format_vtc/local/content/section }}
+                                    {{> format_vtc/local/content/section }}
+                                {{/ format_vtc/local/content/section }}
+                            {{/singlesection}}
+                        </ul>
+                        {{#sectionselector}}
+                            {{$ format_vtc/local/content/sectionselector }}
+                                {{> format_vtc/local/content/sectionselector }}
+                            {{/ format_vtc/local/content/sectionselector }}
+                        {{/sectionselector}}
+                    </div>
+                {{/hasnavigation}}
+                {{#numsections}}
+                    {{$ format_vtc/local/content/addsection}}
+                        {{> format_vtc/local/content/addsection}}
+                    {{/ format_vtc/local/content/addsection}}
+                {{/numsections}}
+                {{#bulkedittools}}
+                    {{$ format_vtc/local/content/bulkedittools}}
+                        {{> format_vtc/local/content/bulkedittools}}
+                    {{/ format_vtc/local/content/bulkedittools}}
+                {{/bulkedittools}}
+            </div>
+            <div class="custom-activity-detail-layout hidden fade-in" style="flex-basis:50%;">
+                <!-- Tab panes -->
+                {{{htmlCustom}}}
+            </div>
+        </div>
+    </div>
+    <div class="hidden-lg" style="border-radius:8px;background:#FFF;box-shadow: 0 4px 25px 0 rgba(0, 96, 173, 0.10);">
+        <div class="custom-course" >
+            <div class="custom-activity-detail-layout hidden fade-in" style="flex-basis:50%;">
+                <!-- Tab panes -->
+                {{{htmlCustom}}}
+            </div>
+
+            <div class="accordion" id="accordionExample" style="width: 98%; margin: 5.14vw auto 5.14vw auto;">
+                <div class="card" style="border-radius: 0">
+                    <div class="card-header" id="headingOne" style="background-color:#E6F0F9;padding: 0">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left cutom-p-no-margin font-weight-bold" type="button"
+                                    data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                    aria-controls="collapseOne"
+                                    style="color:black;font-size: 20px">
+                                {{#str}}listactivity,theme_moove{{/str}}
+                            </button>
+                        </h2>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body" style="padding: 0">
+                            <div class="custom-list-activity" style="flex-basis:50%;height: 100%">
+                                <ul class="{{format}}" data-for="course_sectionlist">
+
+                                    {{#initialsection}}
+                                        {{$ format_vtc/local/content/section }}
+                                            {{> format_vtc/local/content/section }}
+                                        {{/ format_vtc/local/content/section }}
+                                    {{/initialsection}}
+                                    {{#sections}}
+                                        {{$ format_vtc/local/content/section }}
+                                            {{> format_vtc/local/content/section }}
+                                        {{/ format_vtc/local/content/section }}
+                                    {{/sections}}
+                                </ul>
+                                {{#hasnavigation}}
+                                    <div class="single-section">
+                                        {{#sectionnavigation}}
+                                            {{$ format_vtc/local/content/sectionnavigation }}
+                                                {{> format_vtc/local/content/sectionnavigation }}
+                                            {{/ format_vtc/local/content/sectionnavigation }}
+                                        {{/sectionnavigation}}
+                                        <ul class="{{format}}">
+                                            {{#singlesection}}
+                                                {{$ format_vtc/local/content/section }}
+                                                    {{> format_vtc/local/content/section }}
+                                                {{/ format_vtc/local/content/section }}
+                                            {{/singlesection}}
+                                        </ul>
+                                        {{#sectionselector}}
+                                            {{$ format_vtc/local/content/sectionselector }}
+                                                {{> format_vtc/local/content/sectionselector }}
+                                            {{/ format_vtc/local/content/sectionselector }}
+                                        {{/sectionselector}}
+                                    </div>
+                                {{/hasnavigation}}
+                                {{#numsections}}
+                                    {{$ format_vtc/local/content/addsection}}
+                                        {{> format_vtc/local/content/addsection}}
+                                    {{/ format_vtc/local/content/addsection}}
+                                {{/numsections}}
+                                {{#bulkedittools}}
+                                    {{$ format_vtc/local/content/bulkedittools}}
+                                        {{> format_vtc/local/content/bulkedittools}}
+                                    {{/ format_vtc/local/content/bulkedittools}}
+                                {{/bulkedittools}}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+{{#js}}
+    require(['core_courseformat/local/content'], function(component) {
+    component.init('course-format-{{uniqid}}', {}, {{sectionreturn}});
+    });
+{{/js}}
+<script>
+    $( document ).ready(function() {
+        var activityFirst = $('.activity-item-custom').first();
+        if(activityFirst){
+            activityFirst.addClass("active");
+            var divInforID = activityFirst.attr('data-id');
+            $("#"+divInforID).addClass("d-block");
+            $(".custom-activity-detail-layout").show();
+        }
+    });
+</script>

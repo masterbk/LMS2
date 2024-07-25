@@ -1,0 +1,1 @@
+a:3:{s:10:"pluginname";s:20:"Amazon's SDK for PHP";s:14:"clientnotfound";s:92:"AWS Service client not found. Client must be fully qualified classname e.g. \Aws\S3\S3Client";s:16:"privacy:metadata";s:117:"The local aws plugin does not store any personal data. However, it allows other plugins to pass data to AWS services.";}

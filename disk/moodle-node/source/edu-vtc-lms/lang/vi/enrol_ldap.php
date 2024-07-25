@@ -1,0 +1,44 @@
+<?php
+$string["bind_dn"] = 'Nếu bạn muốn sử dụng người dùng liên kết để tìm kiếm người dùng, hãy chỉ định nó ở đây. ';
+$string["bind_dn_key"] = 'Liên kết tên phân biệt người dùng';
+$string["bind_pw"] = 'Mật khẩu cho người dùng liên kết';
+$string["bind_settings"] = 'Cài đặt liên kết';
+$string["contexts"] = 'Bối cảnh LDAP';
+$string["course_fullname"] = 'Tùy chọn: Thuộc tính LDAP để lấy tên đầy đủ từ';
+$string["course_idnumber"] = 'Thuộc tính LDAP để lấy số ID khóa học. ';
+$string["course_search_sub"] = 'Tìm kiếm thành viên nhóm từ bối cảnh phụ';
+$string["course_search_sub_key"] = 'Tìm kiếm ngữ cảnh phụ';
+$string["course_shortname"] = 'Tùy chọn: Thuộc tính LDAP để lấy tên viết tắt từ';
+$string["course_summary"] = 'Tùy chọn: Thuộc tính LDAP để lấy bản tóm tắt từ';
+$string["explodegroupusertypenotsupported"] = 'ldap_explode_group() không hỗ trợ loại người dùng đã chọn: {$a}
+';
+$string["group_memberofattribute"] = 'Tên của thuộc tính chỉ định nhóm mà một người dùng hoặc nhóm nhất định thuộc về (ví dụ: memberOf, groupMembership, v.v.)';
+$string["group_memberofattribute_key"] = 'Thuộc tính \'Thành viên của\'';
+$string["host_url"] = 'Chỉ định máy chủ LDAP ở dạng URL như \'ldap://ldap.myorg.com/\' hoặc \'ldaps://ldap.myorg.com/\'';
+$string["idnumber_attribute"] = 'Nếu thành viên nhóm chứa các tên phân biệt, hãy chỉ định cùng thuộc tính mà bạn đã sử dụng cho ánh xạ \'Số ID\' của người dùng trong cài đặt xác thực LDAP.';
+$string["idnumber_attribute_key"] = 'Thuộc tính số ID';
+$string["ldap_encoding"] = 'Chỉ định mã hóa được máy chủ LDAP sử dụng. ';
+$string["ldap_encoding_key"] = 'mã hóa LDAP';
+$string["ldap:manage"] = 'Quản lý các phiên bản đăng ký LDAP';
+$string["memberattribute"] = 'Thuộc tính thành viên LDAP';
+$string["memberattribute_isdn_key"] = 'Thuộc tính thành viên sử dụng dn';
+$string["nosuchrole"] = 'Không có vai trò như vậy: \'{$a}\'
+';
+$string["objectclass"] = 'objectClass được sử dụng để tìm kiếm các khóa học. ';
+$string["objectclass_key"] = 'Lớp đối tượng';
+$string["opt_deref"] = 'Nếu thành viên nhóm chứa các tên phân biệt, hãy chỉ định cách xử lý bí danh trong quá trình tìm kiếm. ';
+$string["opt_deref_key"] = 'Bí danh tham chiếu';
+$string["pluginname_desc"] = '<p>Bạn có thể sử dụng máy chủ LDAP để kiểm soát việc đăng ký của mình. </p><p>Giả định rằng các khóa học được xác định là nhóm trong LDAP, với mỗi nhóm có nhiều trường thành viên (<em>thành viên</em> hoặc <em>thành viênUid</em>) có chứa thông tin nhận dạng duy nhất của người dùng.</p><p>Để sử dụng đăng ký LDAP, người dùng của bạn <strong>phải</strong> để có trường idnumber hợp lệ. </p><p>Việc đăng ký sẽ được cập nhật khi người dùng đăng nhập. Bạn cũng có thể chạy một tập lệnh để duy trì việc đăng ký đồng bộ.  <em>đăng ký/ldap/cli/sync.php</em>.</p><p>Plugin này cũng có thể được đặt để tự động tạo các khóa học mới khi các nhóm mới xuất hiện trong LDAP.</p>';
+$string["role_mapping"] = '<p>Đối với mỗi vai trò, bạn cần chỉ định tất cả bối cảnh LDAP nơi đặt các nhóm đại diện cho các khóa học. </p><p>Bạn cũng cần chỉ định thuộc tính mà máy chủ LDAP của bạn sử dụng để giữ các thành viên của một nhóm. </p>';
+$string["role_mapping_attribute"] = 'Thuộc tính thành viên LDAP cho {$a}';
+$string["role_mapping_context"] = 'Bối cảnh LDAP cho {$a}';
+$string["role_mapping_key"] = 'Ánh xạ vai trò từ LDAP ';
+$string["roles"] = 'Ánh xạ vai trò';
+$string["syncenrolmentstask"] = 'Đồng bộ hóa nhiệm vụ đăng ký LDAP';
+$string["user_attribute"] = 'Nếu thành viên nhóm chứa các tên phân biệt, hãy chỉ định thuộc tính được sử dụng để đặt tên/tìm kiếm người dùng. ';
+$string["user_attribute_key"] = 'Thuộc tính số ID';
+$string["user_contexts"] = 'Nếu thành viên nhóm chứa các tên phân biệt, hãy chỉ định danh sách ngữ cảnh nơi người dùng được đặt. ';
+$string["user_contexts_key"] = 'Bối cảnh';
+$string["user_search_sub"] = 'Nếu thành viên nhóm chứa các tên phân biệt, hãy chỉ định xem việc tìm kiếm người dùng có được thực hiện trong các ngữ cảnh phụ hay không.';
+$string["user_search_sub_key"] = 'Tìm kiếm ngữ cảnh phụ';
+$string["version"] = 'Phiên bản giao thức LDAP mà máy chủ của bạn đang sử dụng';

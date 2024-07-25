@@ -1,0 +1,19 @@
+<?php
+$string["addmoredimensions"] = 'Khoảng trống cho thêm {$a} xác nhận';
+$string["configgrade0"] = 'Từ mặc định mô tả đánh giá tiêu cực của một khẳng định.';
+$string["configgrade1"] = 'Từ mặc định mô tả đánh giá tích cực của một khẳng định.';
+$string["dimensioncommentfor"] = 'Nhận xét cho {$a}';
+$string["dimensiondescription"] = 'Sự miêu tả';
+$string["dimensiongrade"] = 'Cấp';
+$string["dimensionnumber"] = 'Khẳng định {$a}';
+$string["dimensionweight"] = 'Cân nặng';
+$string["grademapping"] = 'Bảng ánh xạ lớp';
+$string["grade0"] = 'Từ cho lỗi';
+$string["grade0default"] = 'KHÔNG';
+$string["grade1"] = 'Lời cho sự thành công';
+$string["grade1default"] = 'Đúng';
+$string["maperror"] = 'Số lỗi có trọng số nhỏ hơn hoặc bằng';
+$string["mapgrade"] = 'Điểm nộp hồ sơ';
+$string["pluginname"] = 'Số lỗi';
+$string["privacy:metadata"] = 'Plugin Số lỗi chỉ lưu trữ chi tiết của biểu mẫu đánh giá. ';
+$string["privacy:export:metadata:map"] = 'Nếu số lỗi có trọng số đạt tới mức {$a->no Negative} thì điểm là {$a->grade} phần trăm.';

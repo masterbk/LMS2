@@ -1,0 +1,292 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Frontpage layout for the moove theme.
+ *
+ * @package    theme_moove
+ * @copyright  2022 Willian Mano {@link https://conecti.me}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+defined('MOODLE_INTERNAL') || die();
+global $USER, $OUTPUT, $CFG, $PAGE, $SITE, $DB;
+
+require_once($CFG->libdir . '/behat/lib.php');
+require_once($CFG->dirroot . '/course/lib.php');
+
+
+// Add block button in editing mode.
+$addblockbutton = $OUTPUT->addblockbutton();
+
+user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
+user_preference_allow_ajax_update('drawer-open-index', PARAM_BOOL);
+user_preference_allow_ajax_update('drawer-open-block', PARAM_BOOL);
+
+if (isloggedin()) {
+    $courseindexopen = (get_user_preferences('drawer-open-index', true) == true);
+    $blockdraweropen = (get_user_preferences('drawer-open-block') == true);
+} else {
+    $courseindexopen = false;
+    $blockdraweropen = false;
+}
+
+if (defined('BEHAT_SITE_RUNNING')) {
+    $blockdraweropen = true;
+}
+
+$extraclasses = ['uses-drawers'];
+if ($courseindexopen) {
+    $extraclasses[] = 'drawer-open-index';
+}
+
+$blockshtml = $OUTPUT->blocks('side-pre');
+$hasblocks = (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
+if (!$hasblocks) {
+    $blockdraweropen = false;
+}
+$courseindex = core_course_drawer();
+if (!$courseindex) {
+    $courseindexopen = false;
+}
+
+$forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
+
+$secondarynavigation = false;
+$overflow = '';
+if ($PAGE->has_secondary_navigation()) {
+    $secondary = $PAGE->secondarynav;
+
+    if ($secondary->get_children_key_list()) {
+        $tablistnav = $PAGE->has_tablist_secondary_navigation();
+        $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs', true, $tablistnav);
+        $secondarynavigation = $moremenu->export_for_template($OUTPUT);
+        // comment ko muá»‘n cÃ³ thanh quáº£n trá»‹ á»Ÿ trang home
+        // $extraclasses[] = 'has-secondarynavigation';
+    }
+
+    $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
+    if (!is_null($overflowdata)) {
+        $overflow = $overflowdata->export_for_template($OUTPUT);
+    }
+}
+
+$primary = new core\navigation\output\primary($PAGE);
+$renderer = $PAGE->get_renderer('core');
+$primarymenu = $primary->export_for_template($renderer);
+$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions() && !$PAGE->has_secondary_navigation();
+// If the settings menu will be included in the header then don't add it here.
+$regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
+
+$header = $PAGE->activityheader;
+$headercontent = $header->export_for_template($renderer);
+
+$bodyattributes = $OUTPUT->body_attributes($extraclasses);
+$issiteadmin = is_siteadmin() ? (new moodle_url('/admin/search.php'))->out() : false;
+$templatecontext = [
+    'sitename'                  => format_string($SITE->shortname, true, ['context' => \core\context\course::instance(SITEID), "escape" => false]),
+    'output'                    => $OUTPUT,
+    'sidepreblocks'             => $blockshtml,
+    'hasblocks'                 => $hasblocks,
+    'bodyattributes'            => $bodyattributes,
+    'courseindexopen'           => $courseindexopen,
+    'blockdraweropen'           => $blockdraweropen,
+    'courseindex'               => $courseindex,
+    'primarymoremenu'           => $primarymenu['moremenu'],
+    //    'secondarymoremenu'         => $secondarynavigation ? : false,
+    'secondarymoremenu'         => false,
+    'mobileprimarynav'          => $primarymenu['mobileprimarynav'],
+    'usermenu'                  => $primarymenu['user'],
+    'langmenu'                  => $primarymenu['lang'],
+    'forceblockdraweropen'      => $forceblockdraweropen,
+    'regionmainsettingsmenu'    => $regionmainsettingsmenu,
+    'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
+    'overflow'                  => $overflow,
+    'headercontent'             => $headercontent,
+    'addblockbutton'            => $addblockbutton,
+
+];
+$templatecontext = array_merge($templatecontext, defaultTemplateContext());
+$themesettings = new \theme_moove\util\settings();
+
+$listCourse = [];
+$now = strtotime(date('Y-m-d'));
+
+$sql = "SELECT * from {course_categories} where parent =0 and visible =1 order by sortorder ASC";
+$categories = $DB->get_records_sql($sql);
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+$now = time();
+$listCategories = [];
+foreach ($categories as $c) {
+    $sql = "SELECT * FROM {course_categories} where parent = :id and visible = 1 order by sortorder ASC";
+    $subcategories = $DB->get_records_sql($sql, array('id' => $c->id));
+    $listSubCategories = [];
+    $count = 0;
+    foreach ($subcategories as $sc) {
+        $sql = 'SELECT * FROM {course} WHERE visible != 0 and (startdate < :time1 and ( enddate > :time2 or enddate =0 )) and category = :id order by sortorder ASC';
+        $courses = $DB->get_records_sql($sql, array('time1' => $now, 'time2' => $now, 'id' => $sc->id));
+        $count += count($courses);
+    }
+    $listCategories[] = [
+        'id'          => $c->id,
+        'name'        => $c->name,
+        'image'       => themeMooveGetCourseCategoryPicture($c->id),
+        'countcourse' => $count
+    ];
+}
+
+$sql = 'SELECT * FROM {course} 
+        WHERE visible != 0 
+        and (startdate < :time1 and ( enddate > :time2 or enddate =0 )) 
+        and category IN (
+            SELECT id 
+            FROM {course_categories} 
+            WHERE parent !=0 
+            and depth = 2) 
+        order by sortorder ASC';
+$courses = $DB->get_records_sql($sql, array('time1' => $now, 'time2' => $now));
+$listCourse1 = array_filter($courses, function ($c) {
+    if(!in_array($c->id,[289,247,244,241])){
+        return false;
+    }
+    if (getCustomField('context_course', $c->id, 'label')['label'] =='outstanding') {
+        $c->url = \course_get_url($c->id)->out(false);
+        $c->courseimage = getThumbnailCourse($c);
+        if (\core_component::get_plugin_directory('tool', 'courserating')) {
+            $c->rating = ratingCourse($c->id);
+        }
+        $customLabel = getCustomField('context_course', $c->id, 'label');
+        $customTime = getCustomField('context_course', $c->id, 'time');
+        $c->customfield = array_merge($customLabel, $customTime);
+        return true;
+    }
+});
+$listCourse2 = array_filter($courses, function ($c) {
+    if(in_array($c->id,[289,247,244,241])){
+        return false;
+    }
+    if (getCustomField('context_course', $c->id, 'label')['label'] =='outstanding') {
+        $c->url = \course_get_url($c->id)->out(false);
+        $c->courseimage = getThumbnailCourse($c);
+        if (\core_component::get_plugin_directory('tool', 'courserating')) {
+            $c->rating = ratingCourse($c->id);
+        }
+        $customLabel = getCustomField('context_course', $c->id, 'label');
+        $customTime = getCustomField('context_course', $c->id, 'time');
+        $c->customfield = array_merge($customLabel, $customTime);
+        return true;
+    }
+});
+$listCourse = array_merge($listCourse1,$listCourse2);
+$listCourse = array_values($listCourse);
+$countAccess=0;
+$sqlCountTeacher = 'SELECT * FROM {role_assignments} WHERE roleid = 3';
+$countTeacher = count($DB->get_records_sql($sqlCountTeacher));
+$sqlCountStudent = 'SELECT * FROM {role_assignments} WHERE roleid = 5';
+$countLearned = count($DB->get_records_sql($sqlCountStudent));
+$sqlCountActivity = 'SELECT * FROM {course_modules} where course IN (SELECT id from {course} where category in (SELECT id FROM {course_categories} WHERE parent != 0 and depth = 2))';
+$countActivity = count($DB->get_records_sql($sqlCountActivity));
+$templatecontext = array_merge($templatecontext, $themesettings->footer(),
+    [
+        'countaccess'=>$countAccess,
+        'countlearned'=>$countLearned,
+        'countactivity'=>$countActivity,
+        'countteacher'=>$countTeacher,
+        'courses'    => [
+            'list'=>$listCourse,
+            'hiddenbuttonnext' => count($listCourse) > 3 ? true : false,
+            'hiddenbuttonnext2' => count($listCourse) > 2 ? true : false,
+            'hiddenbuttonnext3' => count($listCourse) > 1 ? true : false,
+            'html'             => makeHtmlCarouselCourseOutstanding($listCourse, 3),
+            'html2'            => makeHtmlCarouselCourseOutstanding($listCourse, 2),
+            'html3'            => makeHtmlCarouselCourseOutstanding($listCourse, 1),
+        ],
+        'categories' => [
+            'list'             => $listCategories,
+            'hiddenbuttonnext' => count($listCategories) > 3 ? true : false,
+            'hiddenbuttonnext2' => count($listCategories) > 2 ? true : false,
+            'hiddenbuttonnext3' => count($listCategories) > 1 ? true : false,
+            'html'             => makeHtmlCarouselCategory($listCategories, 3),
+            'html2'            => makeHtmlCarouselCategory($listCategories,2),
+            'html3'            => makeHtmlCarouselCategory($listCategories,1),
+        ]
+    ]
+);
+
+// count visitor
+$table    = 'count_visitor';
+$field    = 'count_visitor';
+$criteria = array();
+$record   = $DB->get_record($table, $criteria, '*', '');
+
+$expirationTime = 3600; // 1 hour in seconds
+if ( ! isset($_SESSION['visited']) || (time() - $_SESSION['visited_time'] > $expirationTime)) {
+    $_SESSION['visited'] = true;
+    $_SESSION['visited_time'] = time();
+
+    if ($record) {
+        $record->$field++;
+        $DB->update_record($table, $record);
+
+        $countVisitor = $record->$field;
+    } else {
+        // The record doesn't exist; create it
+        $newRecord         = new stdClass();
+        $newRecord->$field = 1;
+
+        // Insert the new record into the database
+        $newRecord->id = $DB->insert_record($table, $newRecord, true);
+
+        // Set the count to the initial value (0)
+        $countVisitor = 1;
+    }
+}
+
+$countVisitor                    = $record->$field ?? 1;
+$templatecontext['countVisitor'] = $countVisitor;
+
+$templatecontext = array_merge($templatecontext, $themesettings->frontpage());
+
+//$files =file_get_contents($CFG->dirroot . '/theme/moove/lib/vtc_missing_language_vi.json');
+//$files = json_decode($files);
+//foreach ($files as $key => $file) {
+//    $namefile = explode('_', $key);
+//    if($namefile[0] =="core" || $namefile[0] =="mod"){
+//        $namefile = $namefile[1];
+//    }
+//    $myfile = fopen("$CFG->dirroot" . "/lang/vi/".$namefile.".php", "w");
+//    $txt = "<?php\n";
+//    fwrite($myfile, $txt);
+//    foreach ($file as $key1=>$code) {
+//        $code = addslashes($code);
+//        $txt = "\$string[\"{$key1}\"] = '{$code}';\n";
+//        fwrite($myfile, $txt);
+//    }
+//    fclose($myfile);
+//}
+
+// anh trung yeeu caauf fix => https://trello.com/c/LwXBSmzR/44-imagepng
+$templatecontext['countVisitor'] += 840200;
+$templatecontext['countlearned'] += 79000;
+$templatecontext['countactivity'] += 1132;
+$templatecontext['countteacher'] += 200;
+
+if (isloggedin()) {
+    echo $OUTPUT->render_from_template('theme_moove/home', $templatecontext);
+} else {
+
+    echo $OUTPUT->render_from_template('theme_moove/home', $templatecontext);
+}

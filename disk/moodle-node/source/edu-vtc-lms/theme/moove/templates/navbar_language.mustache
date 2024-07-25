@@ -1,0 +1,36 @@
+{{#showlangmenu}}
+<div class="dropdown show">
+    <a class="dropdown-toggle dropdownlanguage" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img class="lang_icon" src="{{publicimage}}/lang/{{currentlanguage}}.svg" alt="">
+    </a>
+    <div class="dropdown-menu notification_dropdown_content" x-placement="bottom-start">
+        <div class="so_heading">
+            <p>{{#str}}language,theme_moove{{/str}}</p>
+        </div>
+        <div class="user_setting_content">
+            <div class="so_content" data-simplebar="init">
+                <div class="simplebar-wrapper" style="margin: 0;">
+                    <div class="simplebar-mask">
+                        <div class="simplebar-offset" style="right: 0; bottom: 0;">
+                            <div class="simplebar-content"
+                                 style="padding: 0; height: auto; overflow: hidden;">
+                                <nav class="list-group">
+                                    <a href="{{urlchangelanguagevi}}" class="{{#languagevi}}active{{/languagevi}}">
+                                        <div class="lang_icon_flag"><img src="{{publicimage}}/lang/vi.svg" alt="">
+                                        </div>{{#str}}vi, theme_moove{{/str}} (vi)
+                                    </a>
+                                    <a href="{{urlchangelanguageen}}" class="{{#languageen}}active{{/languageen}}">
+                                        <div class="lang_icon_flag"><img src="{{publicimage}}/lang/en.svg" alt="">
+                                        </div>{{#str}}en, theme_moove{{/str}} (en)
+                                    </a>
+
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/showlangmenu}}

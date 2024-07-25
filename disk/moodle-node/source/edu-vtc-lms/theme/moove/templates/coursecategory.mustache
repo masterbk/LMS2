@@ -1,0 +1,787 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_moove/drawers
+
+    Boost drawer template.
+
+    Context variables required for this template:
+    * sitename - The name of the site
+    * output - The core renderer for the page
+    * bodyattributes - attributes for the body tag as a string of html attributes
+    * sidepreblocks - HTML for the blocks
+    * hasblocks - true if there are blocks on this page
+    * courseindexopen - true if the nav drawer should be open on page load
+    * regionmainsettingsmenu - HTML for the region main settings menu
+    * hasregionmainsettingsmenu - There is a region main settings menu on this page.
+
+    Example context (json):
+    {
+        "sitename": "Moodle",
+        "output": {
+            "doctype": "<!DOCTYPE html>",
+            "page_title": "Test page",
+            "favicon": "favicon.ico",
+            "main_content": "<h1>Headings make html validators happier</h1>"
+         },
+        "bodyattributes":"",
+        "sidepreblocks": "<h2>Blocks html goes here</h2>",
+        "hasblocks":true,
+        "courseindexopen": true,
+        "navdraweropen": false,
+        "blockdraweropen": true,
+        "regionmainsettingsmenu": "",
+        "hasregionmainsettingsmenu": false,
+        "addblockbutton": ""
+    }
+}}
+{{> theme_moove/head }}
+
+<body {{{ bodyattributes }}}>
+{{> theme_moove/accessibilitybar }}
+
+{{> core/local/toast/wrapper}}
+<div id="page-wrapper" class="d-print-block">
+
+    {{{ output.standard_top_of_body_html }}}
+
+    {{> theme_moove/navbar }}
+
+    {{#courseindex}}
+        {{< theme_boost/drawer }}
+            {{$id}}theme_boost-drawers-courseindex{{/id}}
+            {{$drawerclasses}}drawer drawer-left {{#courseindexopen}}show{{/courseindexopen}}{{/drawerclasses}}
+            {{$drawercontent}}
+                {{{courseindex}}}
+            {{/drawercontent}}
+            {{$drawerpreferencename}}drawer-open-index{{/drawerpreferencename}}
+            {{$drawerstate}}show-drawer-left{{/drawerstate}}
+            {{$tooltipplacement}}right{{/tooltipplacement}}
+            {{$closebuttontext}}{{#str}}closecourseindex, core{{/str}}{{/closebuttontext}}
+        {{/ theme_boost/drawer}}
+    {{/courseindex}}
+    {{#hasblocks}}
+        {{< theme_boost/drawer }}
+            {{$id}}theme_boost-drawers-blocks{{/id}}
+            {{$drawerclasses}}drawer drawer-right{{#blockdraweropen}} show{{/blockdraweropen}}{{/drawerclasses}}
+            {{$drawercontent}}
+                <section class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
+                    {{{ addblockbutton }}}
+                    {{{ sidepreblocks }}}
+                </section>
+            {{/drawercontent}}
+            {{$drawerpreferencename}}drawer-open-block{{/drawerpreferencename}}
+            {{$forceopen}}{{#forceblockdraweropen}}1{{/forceblockdraweropen}}{{/forceopen}}
+            {{$drawerstate}}show-drawer-right{{/drawerstate}}
+            {{$tooltipplacement}}left{{/tooltipplacement}}
+            {{$drawercloseonresize}}1{{/drawercloseonresize}}
+            {{$closebuttontext}}{{#str}}closeblockdrawer, core{{/str}}{{/closebuttontext}}
+        {{/ theme_boost/drawer}}
+    {{/hasblocks}}
+    <div id="page" data-region="mainpage" data-usertour="scroller"
+         class="drawers {{#courseindexopen}}show-drawer-left{{/courseindexopen}} {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container"
+         style="padding:0 !important;">
+
+
+        <div id="topofscroll" class="main-inner"
+             style="margin-bottom:0;min-height: calc(100vh - 102px - 246.8px);padding: 0 !important;max-width: 100%;background-color: #f2f3f7;">
+            <div class="drawer-toggles d-flex">
+                {{#courseindex}}
+                    <div class="drawer-toggler drawer-left-toggle open-nav d-print-none">
+                        <button class="btn icon-no-margin" data-toggler="drawers" data-action="toggle"
+                                data-target="theme_boost-drawers-courseindex" data-toggle="tooltip"
+                                data-placement="right" title="{{#str}}opendrawerindex, core{{/str}}">
+                            <span class="sr-only">{{#str}}opendrawerindex, core{{/str}}</span>
+                            {{#pix}} t/index_drawer, moodle {{/pix}}
+                        </button>
+                    </div>
+                {{/courseindex}}
+                {{#hasblocks}}
+                    <div class="drawer-toggler drawer-right-toggle ml-auto d-print-none">
+                        <button class="btn icon-no-margin" data-toggler="drawers" data-action="toggle"
+                                data-target="theme_boost-drawers-blocks" data-toggle="tooltip" data-placement="right"
+                                title="{{#str}}opendrawerblocks, core{{/str}}">
+                            <span class="sr-only">{{#str}}opendrawerblocks, core{{/str}}</span>
+                            <span class="dir-rtl-hide">{{#pix}}t/blocks_drawer, core{{/pix}}</span>
+                            <span class="dir-ltr-hide">{{#pix}}t/blocks_drawer_rtl, core{{/pix}}</span>
+                        </button>
+                    </div>
+                {{/hasblocks}}
+            </div>
+
+            <div id="page-content" class="d-print-block">
+                <div id="region-main-box">
+                    {{#hasregionmainsettingsmenu}}
+                        <div id="region-main-settings-menu" class="d-print-none">
+                            <div> {{{ regionmainsettingsmenu }}} </div>
+                        </div>
+                    {{/hasregionmainsettingsmenu}}
+                    <section id="region-main" style="background-color: #f2f3f7" aria-label="{{#str}}content{{/str}}">
+
+                        {{#hasregionmainsettingsmenu}}
+                            <div class="region_main_settings_menu_proxy"></div>
+                        {{/hasregionmainsettingsmenu}}
+                        {{{ output.course_content_header }}}
+                        {{#headercontent}}
+                            {{> core/activity_header }}
+                        {{/headercontent}}
+                        {{#overflow}}
+                            <div class="container-fluid tertiary-navigation">
+                                <div class="navitem">
+                                    {{> core/url_select}}
+                                </div>
+                            </div>
+                        {{/overflow}}
+                        <div class="custom-coursecategory">
+                            <div class="hidden-md">
+                                {{#listcategories}}
+                                    <img src="{{publicimage}}/course-banner.png" alt="" class="w-100">
+                                    <div class="list-category mt-5">
+                                        {{#categories}}
+                                            <div class="d-flex flex-column custom-category">
+                                                <div style="position: relative">
+                                                    <p class="custom-label-category"> {{totalactivity}} {{#str}}lession, theme_moove{{/str}}</p>
+                                                    <div style="max-height: 205px;">
+                                                        {{#image}}
+                                                            <a href="{{url}}">
+                                                                <img src="{{image}}" alt="" class="w-100 custom-banner">
+                                                            </a>
+                                                        {{/image}}
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-row w-100">
+                                                    <div style="flex-basis: 60%">
+                                                        <a href="{{url}}" style="text-decoration:none">
+                                                        <p style="margin-top:20px;font-weight: 700;font-size: 20px;color: #0060AD">{{name}}</p>
+                                                        </a>
+                                                        <p style="font-weight: 600;font-size: 16px;color: #C2C2C2">{{countcourse}} {{#str}}course, theme_moove{{/str}} | {{totalactivity}} {{#str}}lession, theme_moove{{/str}}</p>
+                                                    </div>
+                                                    <div style="flex-basis: 40%;" class="d-flex justify-content-center align-items-center">
+                                                        {{#isloginin}}
+                                                            {{#isLearning}}
+                                                                <spaxn class="d-flex" style="padding: 9px 15px;border-radius: 24px;background: #E2FBD7;color: #34B53A;font-size: 16px;font-weight: 500;"> {{#str}}learning,theme_moove{{/str}}</spaxn>
+                                                            {{/isLearning}}
+                                                        {{/isloginin}}
+                                                    </div>
+                                                </div>
+                                                <div style="margin: 15px 0;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;overflow: hidden;font-weight: 400;font-size: 16px;color: #9BA2AE;">
+                                                    {{{description}}}
+                                                </div>
+
+                                            </div>
+                                        {{/categories}}
+                                    </div>
+                                {{/listcategories}}
+                                {{#listcourse}}
+                                    <div class="position-relative">
+                                        <img src="{{publicimage}}/coursecategory/bannercategory.png" alt="" class="w-100"
+                                             style="min-height: 130px;object-fit: cover">
+                                        <div class="custom-category-search position-absolute">
+                                            <p>{{category.name}}</p>
+                                            <div class="hidden-lg category-custom-breadcums-left"> {{{breadcrumbs.htmlCategory}}}</div>
+                                            <form class="position-relative" action="{{url}}" method="get">
+                                                <div class="hidden">
+                                                    {{#paramurl}}
+                                                        <input type="hidden" name="{{key}}" value="{{value}}"/>
+                                                    {{/paramurl}}
+                                                </div>
+                                                <div class="form-group has-search">
+                                                    <span class="fa fa-search form-control-feedback"></span>
+                                                    <input type="text" name="search" class="form-control"
+                                                           placeholder="{{#str}}searchcourse, theme_moove{{/str}}" value="{{search}}">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="list-category mt-5">
+                                        {{#courses}}
+                                            <div class="d-flex flex-column custom-category">
+                                                <div style="position: relative">
+                                                    <p class="font-weight-bold custom-label-category-{{customfield.label}}"
+                                                       style="cursor: default"> {{#customfield.label}}{{{customfield.labelvalue}}}{{/customfield.label}}</p>
+                                                    {{#isloginin}}
+                                                        {{#customfield.time}}
+                                                            <span class=" btn position-absolute bottom custom-label-time">
+                                                        <i class="fa fa-clock mr-1"></i>{{customfield.time}}
+                                                    </span>
+                                                        {{/customfield.time}}
+                                                    {{/isloginin}}
+                                                    <img src="{{courseimage}}" alt="" class="w-100">
+                                                </div>
+                                                <a href="{{url}}" style="text-decoration: none;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;overflow: hidden">
+                                                    <p style="margin-top:20px;font-weight: 700;font-size: 20px;color: #0060AD">{{fullname}}</p>
+                                                </a>
+                                                <div>
+                                                    {{{rating}}}
+                                                </div>
+                                                <div class="course-custom-summary mb-3" style="">
+                                                    {{{summary}}}
+                                                </div>
+                                                {{#isloginin}}
+                                                    {{#progress}}
+                                                        <div class="mb-3 d-flex flex-column w-100">
+                                                            <div class="progress w-100" style="background-color: rgba(226, 251, 215, 1);height: 10px">
+                                                                <div class="progress-bar" style="width: {{number}}%;background-color:rgba(52, 181, 58, 1)" role="progressbar" aria-valuenow="{{number}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+                                                            <p class="text-right" style="color: #34B53A;text-align: right;font-size: 16px;font-weight: 500;">{{text}}</p>
+                                                        </div>
+                                                    {{/progress}}
+                                                    {{^progress}}
+                                                        <div class="mb-3 course-custom-footer d-flex flex-row justify-content-end">
+                                                            <a href="{{url}}">
+                                                                <button class="btn d-flex align-items-center justify-content-between" style="gap:10px;padding:4px 13px">
+                                                                    <span style="color: #0060AD;font-size: 16px;font-weight: 500;">{{#str}}learnnow,theme_moove{{/str}}</span>
+                                                                    <i class="fa-solid fa-angle-right"></i>
+                                                                </button>
+                                                            </a>
+                                                        </div>
+                                                    {{/progress}}
+                                                {{/isloginin}}
+                                                {{^isloginin}}
+                                                    <div class="mb-3 course-custom-footer" style="display: flex;justify-content: space-between;align-items: center;">
+                                                        {{#customfield.time}}
+                                                            <button class="btn " {{#customfield.time0}}style="background-color: white;color: white;cursor:default;" {{/customfield.time0}}>
+                                                                <i class="fa fa-clock mr-2"></i>{{customfield.time}}
+                                                            </button>
+                                                        {{/customfield.time}}
+                                                        <p class="float-right">
+                                                            {{student}} {{#str}}enroll, theme_moove {{/str}}
+                                                        </p>
+                                                    </div>
+                                                {{/isloginin}}
+                                            </div>
+                                        {{/courses}}
+
+
+                                    </div>
+                                    {{^courses}}
+                                        <div class="text-center">
+                                            <img src="{{publicimage}}/coursecategory/nocourse.png" alt="no course"/>
+                                            {{#search}}
+                                                <h4 class="mt-3 result-search">{{#str}}nocoursesearch,theme_moove,{{search}}{{/str}}</h4>
+                                            {{/search}}
+                                            {{^search}}
+                                                <h4 class="mt-3 result-search">{{#str}}donthavecourse, theme_moove{{/str}}</h4>
+                                            {{/search}}
+                                        </div>
+                                    {{/courses}}
+                                {{/listcourse}}
+                                {{#category}}
+                                    <div class="position-relative">
+                                        <img src="{{publicimage}}/coursecategory/bannercategory.png" alt="" class="w-100"
+                                             style="min-height: 130px;object-fit: cover">
+                                        <div class="custom-category-search position-absolute">
+                                            <p>{{category.name}}</p>
+                                            <div class="hidden-lg category-custom-breadcums-left"> {{{breadcrumbs.htmlCategory}}}</div>
+                                            <form class="position-relative" action="{{url}}" method="get">
+                                                <div class="hidden">
+                                                    {{#paramurl}}
+                                                        <input type="hidden" name="{{key}}" value="{{value}}"/>
+                                                    {{/paramurl}}
+                                                </div>
+                                                <div class="form-group has-search">
+                                                    <span class="fa fa-search form-control-feedback"></span>
+                                                    <input type="text" name="search" class="form-control"
+                                                           placeholder="{{#str}}searchcourse, theme_moove{{/str}}" value="{{search}}">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class=" mx-auto mt-3 category-custom-breadcums">
+                                        <div class="d-flex flex-row justify-content-between mb-2">
+                                            <p class="mb-0 category-custom-breadcums-left"> {{{breadcrumbs.htmlCategory}}}</p>
+                                            <p class="mb-0 category-custom-breadcums-right">{{{breadcrumbs.htmlCategoryRight}}}</p>
+                                        </div>
+                                        <div style="display: flex;flex-direction: row;justify-content: space-between;gap:20px">
+                                            <div class="d-flex position-relative" style="width:50%;align-items: center;flex: 1 1 0">
+                                                <p class="hidden-md font-weight-normal h6 custom-title-subcategory" style="margin:auto 10px auto 0;color: #000;font-size: 17px;font-weight: 500;">
+                                                    {{#str}}subcategory, theme_moove{{/str}}
+                                                </p>
+                                                <div class="dropdown w-100" style="max-width: 300px">
+                                                    <button class="w-100 btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="max-width: 300px;display: flex;align-items: center">
+                                                        <a class="dropdown-item" href="#" style="font-size:16px;text-align:left;width: calc(100% - 16px);padding:0;display: inline-block !important;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{inactivesubcategory}}</a>
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        {{#subcategories}}
+                                                            <a class="dropdown-item {{choose}}" href="{{url}}" aria-current="{{choose}}" style="color: #000;font-size: 14px;font-weight: 500;">{{name}}</a>
+                                                        {{/subcategories}}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="hidden-md custom-filter-course-state">
+                                                <div class="d-flex flex-row custom-button-filter">
+                                                    <a class="text-decoration-none" href="{{listfilter.1.url}}">
+                                                        <button class="d-flex btn category-button-custom {{listfilter.1.choose}}">{{{listfilter.1.name}}}</button>
+                                                    </a>
+                                                    <a class="text-decoration-none" href="{{listfilter.2.url}}">
+                                                        <button class="d-flex btn category-button-custom {{listfilter.2.choose}}" style="gap:5px">{{{listfilter.2.name}}}</button>
+                                                    </a>
+                                                    {{#isloginin}}
+                                                        <div class="dropdown">
+                                                            <button class="category-button-custom btn btn-secondary dropdown-toggle {{#inactivefilterinloginstatus}}true{{/inactivefilterinloginstatus}}" type="button" data-toggle="dropdown" aria-haspopup="true"  style="background-color: #E0E0E0 ">
+                                                                {{{inactivefilterinlogin}}}
+                                                            </button>
+                                                            <div class="dropdown-menu" >
+                                                                <a class="dropdown-item {{listfilter.0.choose}}" href="{{listfilter.0.url}}" aria-current="{{listfilter.0.choose}}" style="color: #000;font-size: 16px;font-weight: 400;">
+                                                                    {{listfilter.0.name}}
+                                                                </a>
+                                                                <a class="dropdown-item {{listfilter.3.choose}}" href="{{listfilter.3.url}}" aria-current="{{listfilter.3.choose}}" style="color: #000;font-size: 16px;font-weight: 400;">
+                                                                    {{listfilter.3.name}}
+                                                                </a>
+                                                                <a class="dropdown-item {{listfilter.4.choose}}" href="{{listfilter.4.url}}" aria-current="{{listfilter.4.choose}}" style="color: #000;font-size: 16px;font-weight: 400;">
+                                                                    {{listfilter.4.name}}
+                                                                </a>
+                                                                <a class="dropdown-item {{listfilter.5.choose}}" href="{{listfilter.5.url}}" aria-current="{{listfilter.5.choose}}" style="color: #000;font-size: 16px;font-weight: 400;">
+                                                                    {{listfilter.5.name}}
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    {{/isloginin}}
+                                                </div>
+                                            </div>
+                                            <div class="hidden-lg custom-filter-course-state" style="width:30%;">
+                                                <div class="d-flex w-100 position-relative" style="align-items: center;flex: 1 1 0">
+                                                    <div class="dropdown w-100" style="max-width: 300px">
+                                                        <button class="w-100 btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="max-width: 300px;display: flex;align-items: center">
+                                                            <a class="dropdown-item" href="#" style="width: calc(100% - 16px);padding:0;display: flex !important;gap:5px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+                                                                {{{inactivefilterinloginScreenMD}}}
+                                                            </a>
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="right:0;left: 0 !important;">
+                                                            {{#listfilter}}
+                                                                <a class="dropdown-item d-flex {{choose}}" href="{{url}}" aria-current="{{choose}}" style="gap:5px;font-size: 16px">{{{name}}}</a>
+                                                            {{/listfilter}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="list-category mt-5">
+                                        {{#courses}}
+                                            <div class="d-flex flex-column custom-category">
+                                                <div style="position: relative">
+                                                    <p class="font-weight-bold custom-label-category-{{customfield.label}}"
+                                                       style="cursor: default"> {{#customfield.label}}{{{customfield.labelvalue}}}{{/customfield.label}}</p>
+                                                    {{#isloginin}}
+                                                        {{#customfield.time}}
+                                                            <span class=" btn position-absolute bottom custom-label-time">
+                                                                <i class="fa fa-clock mr-1"></i>{{customfield.time}}
+                                                            </span>
+                                                        {{/customfield.time}}
+                                                    {{/isloginin}}
+                                                    <a href="{{url}}">
+                                                        <img src="{{courseimage}}" alt="" class="w-100">
+                                                    </a>
+                                                </div>
+                                                <!--<a href="{{url}}" style="text-decoration: none;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;overflow: hidden"><p style="margin-top:20px;font-weight: 700;font-size: 20px;color: #0060AD">{{fullname}}</p>
+                                                    <p data-toggle="tooltip" data-placement="top" title="{{fullname}}" style="margin-top:20px;font-weight: 700;font-size: 20px;color: #0060AD">
+                                                        {{fullname}}
+                                                    </p>
+                                                </a>-->
+                                                <a href="{{url}}" style="text-decoration: none;">
+                                                    <p style="margin-top:20px;font-weight: 700;font-size: 20px;color: #0060AD">{{fullname}}</p>
+                                                </a>
+                                                <div>
+                                                    {{{rating}}}
+                                                </div>
+                                                <div class="course-custom-summary mb-3" style="">
+                                                    {{{summary}}}
+                                                </div>
+                                                {{#isloginin}}
+                                                    {{#progress}}
+                                                        <div class="mb-3 d-flex flex-column w-100">
+                                                            <div class="progress w-100" style="background-color: rgba(226, 251, 215, 1);height: 10px">
+                                                                <div class="progress-bar" style="width: {{number}}%;background-color:rgba(52, 181, 58, 1)" role="progressbar" aria-valuenow="{{number}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+                                                            <p class="text-right" style="color: #34B53A;text-align: right;font-size: 16px;font-weight: 500;">{{text}}</p>
+                                                        </div>
+                                                    {{/progress}}
+                                                    {{^progress}}
+                                                        <div class="mb-3 course-custom-footer d-flex flex-row justify-content-end">
+                                                            <a href="{{url}}">
+                                                                <button class="btn d-flex align-items-center justify-content-between" style="gap:10px;padding:4px 13px">
+                                                                    <span style="color: #0060AD;font-size: 16px;font-weight: 500;">{{#str}}learnnow,theme_moove{{/str}}</span>
+                                                                    <i class="fa-solid fa-angle-right"></i>
+                                                                </button>
+                                                            </a>
+                                                        </div>
+                                                    {{/progress}}
+                                                {{/isloginin}}
+                                                {{^isloginin}}
+                                                    <div class="mb-3 course-custom-footer" style="display: flex;justify-content: space-between;align-items: center;">
+                                                        {{#customfield.time}}
+                                                            <button class="btn " {{#customfield.time0}}style="background-color: white;color: white;cursor:default;" {{/customfield.time0}}>
+                                                                <i class="fa fa-clock mr-2"></i>{{customfield.time}}
+                                                            </button>
+                                                        {{/customfield.time}}
+                                                        <!--<p class="float-right">
+                                                            {{student}} {{#str}}enroll, theme_moove {{/str}}
+                                                        </p>-->
+                                                    </div>
+                                                {{/isloginin}}
+                                            </div>
+                                        {{/courses}}
+                                    </div>
+                                    {{^courses}}
+                                        <div class="text-center">
+                                            <img src="{{publicimage}}/coursecategory/nocourse.png" alt="no course"/>
+                                            {{#search}}
+                                                <h4 class="mt-3 result-search">{{#str}}nocoursesearch,theme_moove,{{search}}{{/str}}</h4>
+                                            {{/search}}
+                                            {{^search}}
+                                                <h4 class="mt-3 result-search">{{#str}}donthavecourse, theme_moove{{/str}}</h4>
+                                            {{/search}}
+                                        </div>
+                                    {{/courses}}
+                                {{/category}}
+                            </div>
+                            <div class="hidden-lg">
+                                {{#listcategories}}
+                                    <img src="{{publicimage}}/course-banner.png" alt="" class="w-100 custom-banner">
+                                    <div class="list-category mt-5">
+                                        {{#categories}}
+                                            <div class="d-flex flex-row custom-category" style="gap:8px">
+                                                <div style="position: relative;flex-basis: 30%">
+                                                    <div style="">
+                                                        {{#image}}
+                                                            <a href="{{url}}">
+                                                                <img src="{{image}}" alt="" style="width: 28.03vw;height:23.36vw;object-fit: cover;border-radius: 8px;">
+                                                            </a>
+                                                        {{/image}}
+                                                    </div>
+                                                </div>
+                                                <div style="flex-basis: 70%">
+                                                    <div class="d-flex flex-row w-100">
+
+                                                        <!--<div style="flex-basis: 100%">
+                                                            <div class="d-flex flex-row justify-content-between" style="gap:10px">
+                                                                <a href="{{url}}" style="text-decoration:none">
+                                                                    <p style="font-weight: 600;font-size: 16px;color: #1890FF">{{name}} </p>
+                                                                </a>
+                                                            </div>
+
+                                                            <p style="font-weight: 400;font-size: 14px;color: #000">
+                                                                {{countcourse}} {{#str}}course, theme_moove{{/str}} | {{totalactivity}} {{#str}}lession, theme_moove{{/str}}
+                                                            </p>
+                                                            <p>
+                                                                {{#isloginin}}
+                                                                    {{#isLearning}}
+                                                                        <spaxn style="color: #34B53A;font-size: 12px;font-weight: 500;">
+                                                                            {{#str}}learning,theme_moove{{/str}}
+                                                                        </spaxn>
+                                                                    {{/isLearning}}
+                                                                {{/isloginin}}
+                                                            </p>
+                                                        </div>-->
+
+                                                        <div style="flex-basis: 100%">
+                                                            <div class="d-flex flex-row justify-content-between" style="gap:10px">
+                                                                <a href="{{url}}" style="text-decoration:none">
+                                                                    <p style="font-weight: 600;font-size: 16px;color: #1890FF">{{name}} </p>
+                                                                </a>
+                                                            </div>
+
+                                                            <p style="font-weight: 400;font-size: 14px;color: #000">
+                                                                {{countcourse}} {{#str}}course, theme_moove{{/str}} | {{totalactivity}} {{#str}}lession, theme_moove{{/str}}
+                                                            </p>
+                                                            <p>
+                                                                {{#isloginin}}
+                                                                    {{#isLearning}}
+                                                                        <spaxn style="color: #34B53A;font-size: 12px;font-weight: 500;">
+                                                                            {{#str}}learning,theme_moove{{/str}}
+                                                                        </spaxn>
+                                                                    {{/isLearning}}
+                                                                {{/isloginin}}
+                                                            </p>
+                                                        </div>
+
+                                                    </div>
+                                                    <div style="font-weight: 400;font-size: 12px;color: #979797;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;">
+                                                        {{{description}}}
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        {{/categories}}
+                                    </div>
+                                {{/listcategories}}
+                                {{#listcourse}}
+                                    <div class="position-relative">
+                                        <img src="{{publicimage}}/coursecategory/bannercategory.png" alt="" class="w-100" style="min-height: 130px;object-fit: cover">
+                                        <div class="custom-category-search position-absolute">
+                                            <p class="mb-3">{{category.name}}</p>
+
+                                            <form class="position-relative" action="{{url}}" method="get">
+                                                <div class="hidden">
+                                                    {{#paramurl}}
+                                                        <input type="hidden" name="{{key}}" value="{{value}}"/>
+                                                    {{/paramurl}}
+                                                </div>
+                                                <div class="form-group has-search">
+                                                    <span class="fa fa-search form-control-feedback"></span>
+                                                    <input type="text" name="search" class="form-control" placeholder="{{#str}}searchcourse, theme_moove{{/str}}" value="{{search}}">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="list-category mt-5">
+                                        {{#courses}}
+                                            <div class="d-flex flex-row flex-md-column custom-category" style="gap:10px">
+                                                <div style="position: relative;flex-basis: 35%">
+                                                    <p class="font-weight-bold custom-label-category-{{customfield.label}}" style="cursor: default"> {{#customfield.label}}{{{customfield.labelvalue}}}{{/customfield.label}}</p>
+
+                                                    <img src="{{courseimage}}" alt="" class="" style="min-height: 110px !important;width: 32.94vw;height: 24.33vw;">
+                                                    {{#progress}}
+                                                        <div class="position-absolute" style="left: 50%;top: 60%;transform: translate(-50%,-50%)">
+                                                            {{>theme_moove/progressbarcircle}}
+                                                        </div>
+                                                    {{/progress}}
+
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-between" style="flex-basis: 65%;" >
+                                                    <div>
+                                                        <a href="{{url}}" style="text-decoration: none;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden">
+                                                            <p style="font-weight: 600;font-size: 16px;color: #0060AD">{{fullname}}</p>
+                                                        </a>
+
+                                                        <div>
+                                                            {{{rating}}}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="course-custom-footer" style="display: flex;justify-content: space-between;align-items: center;">
+                                                        {{#customfield.time}}
+                                                            <p style="{{^customfield.time0}} color: #1890FF;{{/customfield.time0}}font-size: 11px;font-weight: 500;{{#customfield.time0}} background-color: white;color: white;cursor:default;{{/customfield.time0}}" >
+                                                                <i class="fa fa-clock mr-1"></i>{{customfield.time}}
+                                                            </p>
+                                                        {{/customfield.time}}
+                                                        {{#isloginin}}
+                                                            <a href="{{url}}">
+                                                                <button class="btn d-flex align-items-center justify-content-between" style="gap:10px;padding:4px 10px;border-radius: 24px;background: #1890FF;">
+                                                                    <span style="color:white;font-size: 14px;font-weight: 500;">
+                                                                        {{#str}}learnnow,theme_moove{{/str}}
+                                                                    </span>
+                                                                </button>
+                                                            </a>
+
+                                                        {{/isloginin}}
+                                                        {{^isloginin}}
+                                                            <p class="float-right" style="color: #1890FF;font-size: 12px;font-weight: 500;margin-right:5px">
+                                                                <i class="fa-solid fa-users"></i> {{student}} {{#str}}enroll, theme_moove {{/str}}
+                                                            </p>
+
+                                                        {{/isloginin}}
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        {{/courses}}
+
+
+                                    </div>
+                                    {{^courses}}
+                                        <div class="text-center">
+                                            <img src="{{publicimage}}/coursecategory/nocourse.png" alt="no course"/>
+                                            {{#search}}
+                                                <h4 class="mt-3 result-search">{{#str}}nocoursesearch,theme_moove,{{search}}{{/str}}</h4>
+                                            {{/search}}
+                                            {{^search}}
+                                                <h4 class="mt-3 result-search">{{#str}}donthavecourse, theme_moove{{/str}}</h4>
+                                            {{/search}}
+                                        </div>
+                                    {{/courses}}
+                                {{/listcourse}}
+                                {{#category}}
+                                    <div class="hidden-lg category-custom-breadcums-left" style="color: #1890FF;font-size: 14px;font-weight: 500;padding: 10px;"> {{{breadcrumbs.htmlCategory}}}</div>
+                                    <div class="position-relative">
+                                        <img src="{{publicimage}}/coursecategory/bannercategory.png" alt="" class="w-100" style="min-height: 130px;object-fit: cover">
+                                        <div class="custom-category-search position-absolute">
+                                            <p class="mb-3">{{category.name}}</p>
+
+                                            <form class="position-relative" action="{{url}}" method="get">
+                                                <div class="hidden">
+                                                    {{#paramurl}}
+                                                        <input type="hidden" name="{{key}}" value="{{value}}"/>
+                                                    {{/paramurl}}
+                                                </div>
+                                                <div class="form-group has-search">
+                                                    <span class="fa fa-search form-control-feedback"></span>
+                                                    <input type="text" name="search" class="form-control" placeholder="{{#str}}searchcourse, theme_moove{{/str}}" value="{{search}}">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class=" mx-auto mt-3 category-custom-breadcums">
+                                        <div class="d-flex flex-row justify-content-between mb-2">
+                                            <p class="mb-0 category-custom-breadcums-left"> {{{breadcrumbs.htmlCategory}}}</p>
+                                            <p class="mb-0 category-custom-breadcums-right">{{{breadcrumbs.htmlCategoryRight}}}</p>
+                                        </div>
+                                        <div style="display: flex;flex-direction: row;justify-content: space-between;gap:20px">
+                                            <div class="d-flex position-relative" style="width:50%;align-items: center;flex: 1 1 0">
+                                                <p class="hidden-md font-weight-normal h6" style="margin:auto 10px auto 0;color: #000;font-size: 17px;font-weight: 500;">
+                                                    {{#str}}subcategory, theme_moove{{/str}}
+                                                </p>
+                                                <div class="dropdown w-100 custom-button-filter" style="max-width: 300px">
+                                                    <button class="w-100 btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="max-width: 300px;display: flex;align-items: center">
+                                                        <a class="dropdown-item" href="#" style="font-size:16px;text-align:left;width: calc(100% - 16px);padding:0;display: inline-block !important;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{inactivesubcategory}}</a>
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        {{#subcategories}}
+                                                            <a class="dropdown-item {{choose}}" href="{{url}}" aria-current="{{choose}}">{{name}}</a>
+                                                        {{/subcategories}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="hidden-lg custom-filter-course-state" style="width:30%;">
+                                                <div class="d-flex w-100 position-relative" style="align-items: center;flex: 1 1 0">
+                                                    <div class="dropdown w-100" style="max-width: 300px">
+                                                        <button class="w-100 btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="max-width: 300px;display: flex;align-items: center">
+                                                            <a class="dropdown-item" href="#" style="width: calc(100% - 16px);padding:0;display: flex !important;gap:5px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+                                                                {{{inactivefilterinloginScreenMD}}}
+                                                            </a>
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="right:0;left: 0 !important;">
+                                                            {{#listfilter}}
+                                                                <a class="dropdown-item d-flex {{choose}}" href="{{url}}" aria-current="{{choose}}" style="gap:5px;font-size: 16px">{{{name}}}</a>
+                                                            {{/listfilter}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="list-category mt-5">
+                                        {{#courses}}
+                                            <div class="d-flex flex-row flex-md-column custom-category" style="gap:10px">
+                                                <div style="position: relative;flex-basis: 35%">
+                                                    <p class="font-weight-bold custom-label-category-{{customfield.label}}" style="cursor: default"> {{#customfield.label}}{{{customfield.labelvalue}}}{{/customfield.label}}</p>
+                                                    <a href="{{url}}">
+                                                        <img src="{{courseimage}}" alt="" class="" style="min-height: 110px !important;width: 32.94vw;height: 24.33vw;">
+                                                    </a>
+                                                    {{#progress}}
+                                                        <div class="position-absolute" style="left: 50%;top: 60%;transform: translate(-50%,-50%)">
+                                                            {{>theme_moove/progressbarcircle}}
+                                                        </div>
+                                                    {{/progress}}
+
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-between" style="flex-basis: 65%;" >
+                                                    <div>
+                                                        <a href="{{url}}" style="text-decoration: none;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden">
+                                                            <p data-toggle="tooltip" data-placement="top" title="{{fullname}}" style="font-weight: 600;font-size: 16px;color: #0060AD">
+                                                                {{fullname}}
+                                                            </p>
+                                                        </a>
+
+                                                        <div>
+                                                            {{{rating}}}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="course-custom-footer" style="display: flex;justify-content: space-between;align-items: center;">
+                                                        {{#customfield.time}}
+                                                            <p style="{{^customfield.time0}} color: #1890FF;{{/customfield.time0}}font-size: 11px;font-weight: 500;{{#customfield.time0}} background-color: white;color: white;cursor:default;{{/customfield.time0}}" >
+                                                                <i class="fa fa-clock mr-1"></i>{{customfield.time}}
+                                                            </p>
+                                                        {{/customfield.time}}
+                                                        {{#isloginin}}
+                                                            <a href="{{url}}">
+                                                                <button class="btn d-flex align-items-center justify-content-between" style="gap:10px;padding:4px 10px;border-radius: 24px;background: #1890FF;">
+                                                                    <span style="color:white;font-size: 14px;font-weight: 500;">
+                                                                        {{#str}}learnnow,theme_moove{{/str}}
+                                                                    </span>
+                                                                </button>
+                                                            </a>
+
+                                                        {{/isloginin}}
+                                                        {{^isloginin}}
+                                                            <!--<p class="float-right" style="color: #1890FF;font-size: 12px;font-weight: 500;margin-right:5px">
+                                                                <i class="fa-solid fa-users"></i> {{student}} {{#str}}enroll, theme_moove {{/str}}
+                                                            </p>-->
+
+                                                        {{/isloginin}}
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        {{/courses}}
+
+
+                                    </div>
+                                    {{^courses}}
+                                        <div class="text-center">
+                                            <img src="{{publicimage}}/coursecategory/nocourse.png" alt="no course"/>
+                                            {{#search}}
+                                                <h4 class="mt-3 result-search">{{#str}}nocoursesearch,theme_moove,{{search}}{{/str}}</h4>
+                                            {{/search}}
+                                            {{^search}}
+                                                <h4 class="mt-3 result-search">{{#str}}donthavecourse, theme_moove{{/str}}</h4>
+                                            {{/search}}
+                                        </div>
+                                    {{/courses}}
+                                {{/category}}
+                            </div>
+                            <div class="custom-pagination pagination pagination-centered justify-content-center mt-4">
+                                {{#category}}
+                                    {{{paging}}}
+                                {{/category}}
+                                {{#listcourse}}
+                                    {{{paging}}}
+                                {{/listcourse}}
+                            </div>
+                        </div>
+
+                        <!--  {{{ output.main_content }}}-->
+                        <!--  {{{ output.activity_navigation }}}-->
+                        <!--  {{{ output.course_content_footer }}}-->
+
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        {{> theme_moove/footer }}
+    </div>
+    {{{ output.standard_after_main_region_html }}}
+</div>
+
+</body>
+<script>
+    $(document).ready(function(){
+        $('.custom-category-search .fa-search').on('click',function(){
+           console.log('sfsdf');
+           $(this).parent().parent().submit();
+        });
+    });
+</script>
+</html>
+{{#js}}
+    M.util.js_pending('theme_boost/loader');
+    require(['theme_boost/loader', 'theme_boost/drawer'], function(Loader, Drawer) {
+    Drawer.init();
+    M.util.js_complete('theme_boost/loader');
+    });
+{{/js}}

@@ -1,0 +1,124 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_moove/footer
+
+    Page footer.
+
+    Example context (json):
+    {
+        "output": {
+            "page_doc_link": "Help and documentation",
+            "supportemail": "<a href=\"#\">Contact site support</a>",
+            "has_popover_links": true,
+            "services_support": "Services and support",
+            "login_info": "You are logged in as cute kitten",
+            "moodle_release": "90210"
+        }
+    }
+}}
+
+<footer id="page-footer" class="position-relative">
+    <div class="moove-container-fluid custom-footer">
+            <div class=" column-left" >
+                <img src="{{publicimage}}/logovtcedu2.png" alt="" style="margin-top: 9%; width:86%;object-fit:cover">
+            </div>
+            <div class="">
+                <p class="contact-info-header" style="text-transform: uppercase">
+                    {{#str}}contactinfo,theme_moove{{/str}}
+                </p>
+                <div class="contact-info">
+                    {{#phone}}
+                        <p><i class="fa fa-phone"></i> {{phone}}</p>
+                    {{/phone}}
+
+                    {{#website}}
+                        <p><i class="fa fa-globe"></i> {{website}}</p>
+                    {{/website}}
+                    {{#email}}
+                        <p><i class="fa fa-envelope-o"></i> {{email}}</p>
+                    {{/email}}
+                    {{#fax}}
+                        <p><i class="fa fa-fax"></i>{{fax}}</p>
+                    {{/fax}}
+                </div>
+            </div>
+            <div class="">
+                <p class="contact-info-header" style="text-transform: uppercase">
+                    {{#str}}location,theme_moove{{/str}}
+                </p>
+                <div class="contact-info" style="grid-template-columns: repeat(1,minmax(0,1fr));">
+                    {{#address}}
+                        <p>{{address}}</p>
+                    {{/address}}
+                </div>
+            </div>
+    </div>
+
+    <div class="footer-content-debugging footer-dark bg-dark text-light">
+        <div class="moove-container-fluid footer-dark-inner">
+            {{{ output.debug_footer_html }}}
+        </div>
+    </div>
+
+<!--    <div data-region="footer-container-popover">-->
+<!--        <button class="btn btn-icon bg-secondary icon-no-margin btn-footer-popover" data-action="footer-popover" aria-label="{{#str}}showfooter, theme_boost{{/str}}">-->
+<!--            {{#pix}}e/question, core{{/pix}}-->
+<!--        </button>-->
+<!--    </div>-->
+    <div class="footer-content-popover container" data-region="footer-content-popover">
+<!--        {{# output.has_popover_links }}-->
+<!--            <div class="footer-section p-3 border-bottom">-->
+<!--                {{# output.page_doc_link }}-->
+<!--                    <div>{{{ output.page_doc_link }}}</div>-->
+<!--                {{/ output.page_doc_link }}-->
+
+<!--                {{# output.services_support_link }}-->
+<!--                    <div>{{{ output.services_support_link }}}</div>-->
+<!--                {{/ output.services_support_link }}-->
+<!--            </div>-->
+<!--        {{/ output.has_popover_links }}-->
+<!--        <div class="footer-section p-3">-->
+<!--            <div>{{#str}}poweredbymoodle, core{{/str}}</div>-->
+<!--            {{#output.moodle_release}}-->
+<!--                <div>-->
+<!--                    {{#str}}version, core{{/str}} {{{ output.moodle_release }}}-->
+<!--                </div>-->
+<!--            {{/output.moodle_release}}-->
+<!--        </div>-->
+<!--        {{^disableorangefooter}}-->
+<!--            <div class="copyright">-->
+<!--                <div class="madeby">-->
+<!--                    <p>{{#str}}themedevelopedby, theme_moove{{/str}}</p>-->
+<!--                    <a href="https://conecti.me">-->
+<!--                        <img src="{{config.wwwroot}}/theme/moove/pix/logo_conectime.svg" alt="Conecti.me" style="height: 40px;">-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        {{/disableorangefooter}}-->
+    </div>
+</footer>
+
+{{{ output.show_license_notice }}}
+
+{{{ output.standard_end_of_body_html }}}
+
+{{#js}}
+    require(['theme_boost/footer-popover'], function(FooterPopover) {
+        FooterPopover.init();
+    });
+{{/js}}

@@ -1,0 +1,539 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_moove/drawers
+
+    Boost drawer template.
+
+    Context variables required for this template:
+    * sitename - The name of the site
+    * output - The core renderer for the page
+    * bodyattributes - attributes for the body tag as a string of html attributes
+    * sidepreblocks - HTML for the blocks
+    * hasblocks - true if there are blocks on this page
+    * courseindexopen - true if the nav drawer should be open on page load
+    * regionmainsettingsmenu - HTML for the region main settings menu
+    * hasregionmainsettingsmenu - There is a region main settings menu on this page.
+
+    Example context (json):
+    {
+        "sitename": "Moodle",
+        "output": {
+            "doctype": "<!DOCTYPE html>",
+            "page_title": "Test page",
+            "favicon": "favicon.ico",
+            "main_content": "<h1>Headings make html validators happier</h1>"
+         },
+        "bodyattributes":"",
+        "sidepreblocks": "<h2>Blocks html goes here</h2>",
+        "hasblocks":true,
+        "courseindexopen": true,
+        "navdraweropen": false,
+        "blockdraweropen": true,
+        "regionmainsettingsmenu": "",
+        "hasregionmainsettingsmenu": false,
+        "addblockbutton": ""
+    }
+}}
+{{> theme_moove/head }}
+
+<body {{{ bodyattributes }}}>
+{{> theme_moove/accessibilitybar }}
+
+{{> core/local/toast/wrapper}}
+<div id="page-wrapper" class="d-print-block">
+
+    {{{ output.standard_top_of_body_html }}}
+
+    {{> theme_moove/navbar }}
+
+    {{#courseindex}}
+        {{< theme_boost/drawer }}
+            {{$id}}theme_boost-drawers-courseindex{{/id}}
+            {{$drawerclasses}}drawer drawer-left {{#courseindexopen}}show{{/courseindexopen}}{{/drawerclasses}}
+            {{$drawercontent}}
+                {{{courseindex}}}
+            {{/drawercontent}}
+            {{$drawerpreferencename}}drawer-open-index{{/drawerpreferencename}}
+            {{$drawerstate}}show-drawer-left{{/drawerstate}}
+            {{$tooltipplacement}}right{{/tooltipplacement}}
+            {{$closebuttontext}}{{#str}}closecourseindex, core{{/str}}{{/closebuttontext}}
+        {{/ theme_boost/drawer}}
+    {{/courseindex}}
+<!--    {{#hasblocks}}-->
+<!--        {{< theme_boost/drawer }}-->
+<!--            {{$id}}theme_boost-drawers-blocks{{/id}}-->
+<!--            {{$drawerclasses}}drawer drawer-right{{#blockdraweropen}} show{{/blockdraweropen}}{{/drawerclasses}}-->
+<!--            {{$drawercontent}}-->
+<!--                <section class="d-print-none" aria-label="{{#str}}blocks{{/str}}">-->
+<!--                    {{{ addblockbutton }}}-->
+<!--                    {{{ sidepreblocks }}}-->
+<!--                </section>-->
+<!--            {{/drawercontent}}-->
+<!--            {{$drawerpreferencename}}drawer-open-block{{/drawerpreferencename}}-->
+<!--            {{$forceopen}}{{#forceblockdraweropen}}1{{/forceblockdraweropen}}{{/forceopen}}-->
+<!--            {{$drawerstate}}show-drawer-right{{/drawerstate}}-->
+<!--            {{$tooltipplacement}}left{{/tooltipplacement}}-->
+<!--            {{$drawercloseonresize}}1{{/drawercloseonresize}}-->
+<!--            {{$closebuttontext}}{{#str}}closeblockdrawer, core{{/str}}{{/closebuttontext}}-->
+<!--        {{/ theme_boost/drawer}}-->
+<!--    {{/hasblocks}}-->
+        <div id="page" data-region="mainpage" data-usertour="scroller"
+         class="p-0 drawers {{#courseindexopen}}show-drawer-left{{/courseindexopen}} {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container" {{^secondarymoremenu}} style="{{#modquizattempt}}background-color:#F4FAFF;{{/modquizattempt}} margin-top:60px" {{/secondarymoremenu}}>
+
+                {{{ output.full_header }}}
+
+            <div id="topofscroll" class="main-inner {{#course}}custom-course-mainpage{{/course}} {{#modquizattempt}}custom-course-mod-quiz{{/modquizattempt}}" style="{{#modquizattempt}}background-color:#F4FAFF{{/modquizattempt}}">
+            <div class="drawer-toggles d-flex">
+                {{#courseindex}}
+                    <div class="drawer-toggler drawer-left-toggle open-nav d-print-none">
+                        <button class="btn icon-no-margin" data-toggler="drawers" data-action="toggle" data-target="theme_boost-drawers-courseindex" data-toggle="tooltip" data-placement="right" title="{{#str}}opendrawerindex, core{{/str}}"
+                        >
+                            <span class="sr-only">{{#str}}opendrawerindex, core{{/str}}</span>
+                            {{#pix}} t/index_drawer, moodle {{/pix}}
+                        </button>
+                    </div>
+                {{/courseindex}}
+                {{#hasblocks}}
+                    <div class="drawer-toggler drawer-right-toggle ml-auto d-print-none">
+                        <button class="btn icon-no-margin" data-toggler="drawers" data-action="toggle" data-target="theme_boost-drawers-blocks" data-toggle="tooltip" data-placement="right" title="{{#str}}opendrawerblocks, core{{/str}}"
+                        >
+                            <span class="sr-only">{{#str}}opendrawerblocks, core{{/str}}</span>
+                            <span class="dir-rtl-hide">{{#pix}}t/blocks_drawer, core{{/pix}}</span>
+                            <span class="dir-ltr-hide">{{#pix}}t/blocks_drawer_rtl, core{{/pix}}</span>
+                        </button>
+                    </div>
+                {{/hasblocks}}
+            </div>
+            {{#course}}
+                <div class="mb-3 custom-course-breadcums" style="color: #1890FF !important;">
+                    {{{course.breadcrumbs}}}
+                </div>
+                {{> theme_moove/custom_course/custombannercourse }}
+
+            {{/course}}
+
+
+            <div id="page-content " class="d-print-block" {{#course}}style="margin-top: 25px;"{{/course}}>
+
+                <div id="region-main-box">
+                    {{#hasregionmainsettingsmenu}}
+                        <div id="region-main-settings-menu" class="d-print-none">
+                            <div> {{{ regionmainsettingsmenu }}} </div>
+                        </div>
+                    {{/hasregionmainsettingsmenu}}
+
+                    <section id="region-main" aria-label="{{#str}}content{{/str}}"  style="{{#course}}border-radius: 25px;{{/course}}{{#modquizattempt}}background-color:#F4FAFF;{{/modquizattempt}}">
+                        {{#course}}
+                            <div class="m-auto" style="width: fit-content">
+                                <img src="{{publicimage}}/rafiki.png" alt="" width="100%"/>
+                                {{#formsenrol}}
+                                    <p class="text-center"
+                                       style="color: #FF0000;font-weight: 600;font-size: 16px;margin-top: 20px">{{header}}</p>
+                                    <div class="custom-form-enrol">
+                                        {{{html}}}
+                                    </div>
+
+                                {{/formsenrol}}
+                            </div>
+<!--                            {{#hasregionmainsettingsmenu}}-->
+<!--                                <div class="region_main_settings_menu_proxy"></div>-->
+<!--                            {{/hasregionmainsettingsmenu}}-->
+<!--                            {{{ output.course_content_header }}}-->
+<!--                            {{#headercontent}}-->
+<!--                                {{> core/activity_header }}-->
+<!--                            {{/headercontent}}-->
+<!--                            {{#overflow}}-->
+<!--                                <div class="container-fluid tertiary-navigation">-->
+<!--                                    <div class="navitem">-->
+<!--                                        {{> core/url_select}}-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            {{/overflow}}-->
+<!--                            {{{ output.main_content }}}-->
+<!--                            {{{ output.course_content_footer }}}-->
+                        {{/course}}
+
+                        {{^course}}
+                            {{#hasregionmainsettingsmenu}}
+                                <div class="region_main_settings_menu_proxy"></div>
+                            {{/hasregionmainsettingsmenu}}
+                            {{{ output.course_content_header }}}
+                            {{#headercontent}}
+                                {{> core/activity_header }}
+                            {{/headercontent}}
+                            {{#overflow}}
+                                <div class="container-fluid tertiary-navigation">
+                                    <div class="navitem">
+                                        {{> core/url_select}}
+                                    </div>
+                                </div>
+                            {{/overflow}}
+                            {{{ output.main_content }}}
+                            {{{ output.course_content_footer }}}
+                        {{/course}}
+
+                    </section>
+                </div>
+            </div>
+            {{#modquizattempt}}
+                {{#review}}
+                    <div class="accordion custom-list-question-minimap-md hidden-lg" id="custom-accordion-quiz-minimap" style="position: fixed;left: 0;bottom: 0;width: 100%">
+                        <div class="card" style="border-radius: 20px 20px 0 0;">
+                            <div id="custom-accordion" class="collapse" aria-labelledby="headingOne" data-parent="#custom-accordion-quiz-minimap">
+                                <div class="card-body" style="padding: 0">
+                                    <div class="d-flex justify-content-center align-items-center" style="height:43.623px;color: black;text-align: center;font-size: 18px;font-weight: 500;">
+                                        {{#str}}examresult,theme_moove{{/str}}
+                                    </div>
+                                    <div class="" style="flex-basis:50%;height: 100%">
+                                        <div id="carouselExampleIndicators" class="d-flex flex-column carousel slide" data-ride="carousel" data-interval="false" style="padding: 0 15px;margin-top: 15px">
+                                            <div class="carousel-inner" style="height: 100%">
+                                                <div class="carousel-item active h-100 position-relative custom-course-teacher-list-item">
+                                                    <div class="d-flex flex-column justify-content-center align-items-center" style="gap:11px">
+                                                        <div class="custom-quiz-review-table w-100" style="background-color: {{#examstatuspassed}}#DDF0E6{{/examstatuspassed}}{{#examstatusnotpass}}#FDE4E4{{/examstatusnotpass}}">
+                                                            <div class="d-flex flex-row justify-content-between">
+                                                                <span>{{#str}}examstatus,theme_moove{{/str}}</span>
+                                                                    {{#examstatuspassed}}
+                                                                        <span style="color: #28A164;font-size: 16px;font-weight: 700;">
+                                                                            {{#str}}exampassed,theme_moove{{/str}}
+                                                                        </span>
+                                                                    {{/examstatuspassed}}
+                                                                    {{#examstatusnotpass}}
+                                                                        <span style="color: #FF0202;font-size: 16px;font-weight: 700;">
+                                                                            {{#str}}examnotpass,theme_moove{{/str}}
+                                                                        </span>
+                                                                    {{/examstatusnotpass}}
+                                                            </div>
+                                                            <div class="d-flex flex-row justify-content-between">
+                                                                <span>{{#str}}numberanswerright,theme_moove{{/str}}</span>
+                                                                <span >{{numberrightanswer}}</span>
+                                                            </div>
+                                                            <div class="d-flex flex-row justify-content-between">
+                                                                <span>{{#str}}dotime,theme_moove{{/str}}</span>
+                                                                <span>{{dotime}}</span>
+                                                            </div>
+                                                            <div class="d-flex flex-row justify-content-between">
+                                                                <span>{{#str}}testscore,theme_moove{{/str}}</span>
+                                                                <span>{{grade}}</span>
+                                                            </div>
+                                                            <div class="d-flex flex-row justify-content-between">
+                                                                <span>{{#str}}starttime,theme_moove{{/str}}</span>
+                                                                <span style="font-weight: 500">{{starttime}}</span>
+                                                            </div>
+
+
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="carousel-item h-100 position-relative custom-course-teacher-list-item">
+                                                    <div class="d-flex flex-column " style="padding:0;gap:11px;height: 238px;overflow-y: auto">
+                                                     {{{review}}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <ol class="carousel-indicators position-relative custom-quiz-review-carousel-indicators" style="border: unset;margin-top: 10px">
+                                                <li class="active" data-target="#carouselExampleIndicators" data-slide-to="0" style="border:none;width: 8px;height: 8px;background-color: #979797;border-radius: 50px;opacity: 1"></li>
+                                                <li class="" data-target="#carouselExampleIndicators" data-slide-to="1" style="border:none;width: 8px;height: 8px;background-color: #979797;border-radius: 50px;opacity: 1"></li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <button class="btn my-3" style="width:70%;border-radius: 8px;background: #D8D8D8;" data-toggle="modal" data-target=".custom-course-modal-quiz-review-md">
+                                        <i>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="29" viewBox="0 0 28 29" fill="none">
+                                                <path d="M14.875 9.25003V14.0046L18.8256 16.3747C19.0246 16.4942 19.168 16.6879 19.2242 16.9131C19.2804 17.1383 19.2448 17.3767 19.1253 17.5757C19.0058 17.7747 18.8121 17.918 18.5869 17.9742C18.3617 18.0304 18.1234 17.9949 17.9244 17.8753L13.5494 15.2503C13.4199 15.1726 13.3127 15.0626 13.2384 14.9311C13.164 14.7996 13.125 14.6511 13.125 14.5V9.25003C13.125 9.01797 13.2172 8.79541 13.3813 8.63131C13.5454 8.46722 13.7679 8.37503 14 8.37503C14.2321 8.37503 14.4546 8.46722 14.6187 8.63131C14.7828 8.79541 14.875 9.01797 14.875 9.25003ZM14 4.00003C12.6197 3.99659 11.2524 4.26694 9.97725 4.79544C8.70211 5.32393 7.54444 6.10007 6.57125 7.07894C5.77609 7.88394 5.06953 8.65831 4.375 9.46878V7.50003C4.375 7.26797 4.28281 7.04541 4.11872 6.88131C3.95462 6.71722 3.73206 6.62503 3.5 6.62503C3.26794 6.62503 3.04538 6.71722 2.88128 6.88131C2.71719 7.04541 2.625 7.26797 2.625 7.50003V11.875C2.625 12.1071 2.71719 12.3297 2.88128 12.4938C3.04538 12.6578 3.26794 12.75 3.5 12.75H7.875C8.10706 12.75 8.32962 12.6578 8.49372 12.4938C8.65781 12.3297 8.75 12.1071 8.75 11.875C8.75 11.643 8.65781 11.4204 8.49372 11.2563C8.32962 11.0922 8.10706 11 7.875 11H5.35938C6.14141 10.0791 6.92016 9.21175 7.80828 8.31269C9.02437 7.0966 10.5719 6.26585 12.2574 5.92424C13.9429 5.58263 15.6918 5.7453 17.2854 6.39194C18.879 7.03857 20.2467 8.14049 21.2176 9.56001C22.1886 10.9795 22.7197 12.6537 22.7445 14.3733C22.7694 16.0929 22.287 17.7818 21.3575 19.2288C20.4281 20.6758 19.0928 21.8168 17.5185 22.5093C15.9443 23.2017 14.2009 23.4149 12.5062 23.1222C10.8115 22.8295 9.2406 22.0439 7.98984 20.8635C7.90625 20.7845 7.80791 20.7227 7.70045 20.6817C7.59299 20.6407 7.4785 20.6213 7.36353 20.6245C7.24856 20.6278 7.13536 20.6537 7.03038 20.7007C6.92541 20.7477 6.83072 20.8149 6.75172 20.8985C6.67272 20.9821 6.61096 21.0804 6.56997 21.1879C6.52897 21.2953 6.50954 21.4098 6.51279 21.5248C6.51604 21.6398 6.54191 21.753 6.58891 21.8579C6.63591 21.9629 6.70312 22.0576 6.78672 22.1366C8.03299 23.3127 9.54817 24.1659 11.2 24.6217C12.8518 25.0775 14.5901 25.1222 16.2632 24.7517C17.9363 24.3812 19.4932 23.6069 20.7982 22.4964C22.1032 21.3858 23.1165 19.9727 23.7498 18.3805C24.3831 16.7882 24.6171 15.0651 24.4313 13.3616C24.2455 11.6582 23.6456 10.026 22.684 8.60771C21.7224 7.18938 20.4283 6.02796 18.9146 5.22479C17.4008 4.42163 15.7136 4.00115 14 4.00003Z" fill="black"/>
+                                            </svg>
+                                        </i>
+                                        {{#str}}viewattempthistory,theme_moove{{/str}}
+                                    </button>
+
+                                </div>
+                            </div>
+                            <div class="card-header" id="headingOne" style="padding: 0;border-radius: 12px 12px 0 0;background: #FFF;box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.10);">
+                                <h2 class="mb-0">
+                                    <button class="custom-quiz-btn-review btn btn-link btn-block cutom-p-no-margin font-weight-bold " type="button"
+                                            data-toggle="collapse" data-target="#custom-accordion" aria-expanded="true"
+                                            aria-controls="custom-accordion" style="color:black;font-size: 20px">
+                                        <img src="{{publicimage}}/course/frame33434.png">
+                                        <span style="color: #1890FF;font-size: 16px;font-weight: 500;">{{#str}}examresult,theme_moove{{/str}}</span>
+                                    </button>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade custom-course-modal-quiz-review-md" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="margin-top:25%;">
+                        <div class="modal-dialog" style="">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">{{#str}}attempthistory,theme_moove{{/str}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body d-flex flex-column" style="gap:17px;height: 500px;overflow: scroll">
+                                    {{#history}}
+                                        <div style="border-radius: 6px;background: #F2F9FF;">
+                                            <div class="d-flex flex-row justify-content-between align-items-center" style="border-radius: 6px 6px 0 0;background: #B4DDFF;padding:14px">
+                                                <span>{{#str}}examnumber,theme_moove{{/str}}: {{index}}</span>
+                                                {{#checkIsCurrentAttempt}}
+                                                    <span style="padding:4px 10px;border-radius: 17px;background: rgba(255, 255, 255, 0.25);color: #1890FF;font-size: 14px;font-weight: 500;letter-spacing: 0.352px;">
+                                                {{#str}}isthecurrentassignment,theme_moove{{/str}}
+                                            </span>
+                                                {{/checkIsCurrentAttempt}}
+                                            </div>
+                                            <div class="d-flex flex-column" style="padding: 11px 14px 18px 14px">
+                                                <span>{{#str}}time,theme_moove{{/str}}: {{starttime}}</span>
+                                                <span>{{#str}}examresult,theme_moove{{/str}}:
+                                                    {{#examStatusPassed}}<span style="color: #34B53A;font-size: 14px;font-weight: 600;">{{#str}}exampassed,theme_moove{{/str}}</span>{{/examStatusPassed}}
+                                                    {{^examStatusPassed}}<span style="color: #FF0500;font-size: 14px;font-weight: 600;">{{#str}}examnotpass,theme_moove{{/str}}</span>{{/examStatusPassed}}
+                                                </span>
+                                                <span>{{#str}}examtime,theme_moove{{/str}}: {{dotime}}</span>
+                                                <span>{{#str}}grade,theme_moove{{/str}}: {{grade}}</span>
+                                            </div>
+                                        </div>
+                                    {{/history}}
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                {{/review}}
+                {{^review}}
+                    <div class="accordion custom-list-question-minimap-md hidden-lg" id="custom-accordion-quiz-minimap" style="position: fixed;left: 0;bottom: 0;width: 100%">
+                        <div class="card" style="border-radius: 20px 20px 0 0;">
+                            <div id="custom-accordion" class="collapse" aria-labelledby="headingOne" data-parent="#custom-accordion-quiz-minimap">
+                                <div class="card-body" style="padding: 0">
+                                    <div class="d-flex justify-content-center align-items-center" style="height:43.623px;border-radius: 20px 20px 0 0;background: #1890FF;color: #FFF;text-align: center;font-size: 18px;font-weight: 500;">
+                                        {{#str}}selectquestion,theme_moove{{/str}}
+                                    </div>
+                                    <div class="custom-list-activity" style="background: #F3F6FF;height: 100%">
+                                        {{{content}}}
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card-header" id="headingOne" style="padding: 0;border-radius: 12px 12px 0 0;background: #FFF;box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.10);">
+                                <h2 class="mb-0">
+                                    <button class="custom-quiz-btn-review btn btn-link btn-block text-center cutom-p-no-margin font-weight-bold" type="button"
+                                            data-toggle="collapse" data-target="#custom-accordion" aria-expanded="true"
+                                            aria-controls="custom-accordion" style="color:black;font-size: 20px">
+                                        <img src="{{publicimage}}/course/frame33434.png">
+                                    </button>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+
+                {{/review}}
+            {{/modquizattempt}}
+
+        </div>
+
+
+        {{{ output.get_module_footer_callbacks_data }}}
+
+        <div class="moove-container-fluid p-0 mb-4 {{#modquizattempt}}hidden {{/modquizattempt}}">
+            {{{ output.activity_navigation }}}
+        </div>
+
+        <div class="{{#modquizattempt}}hidden {{/modquizattempt}}">
+            {{> theme_moove/footer }}
+
+        </div>
+    </div>
+    {{{ output.standard_after_main_region_html }}}
+</div>
+
+</body>
+<script>
+    {{#modquizattempt}}
+        {{^review}}
+            $(document).ready(function(){
+                //If the user logs in via phone, the interface will change as required
+                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    //Hidden element
+                    $('#btn-submit').css('display', 'none');
+                    $(".navbar").addClass('hidden');
+                    $("#page-header").addClass('hidden');
+                    $('#quiz-timer').addClass('hidden');
+                    let inputFinishAttempt = $("input").filter(function() {
+                        let value = $(this).val();
+                        return value === "Finish attempt ..." || value === "Làm xong ...";
+                    });
+                    inputFinishAttempt.addClass('hidden');
+
+                    //Change some css
+                    let page = document.getElementById("page");
+                    let row = $(".navitem").parent();
+                    page.style.setProperty('margin-top', '0', 'important');
+                    row.parent().parent().css('background-color', "#fff");
+                    row.closest('#region-main').addClass('pt-0');
+                    row.closest('#topofscroll').css('background-color', "#fff");
+                    row.closest('.container-fluid').append(`<hr class="my-1 hr-mobile top-53">`);
+
+
+                    let html = `<div class="h5 m-0">
+                                    <span>⏱</span>
+                                    <b><span id="quiz-timer-clone">00:00:00</span></b>
+                                </div>
+                                <div>
+                                    <a class="endtestlink aalink mb-3 btn btn-primary background-color-1890FF" id="btl-submit-clone" style="display: block;border: none; margin: 0 !important;" href="${$('#btn-submit').attr('href')}">{{#str}}submit,theme_moove{{/str}}</a>
+                                </div>`;
+                    row.append(html);
+                    row.addClass('justify-content-between align-items-center');
+
+                    //Change button back
+                    let buttonBack = $('.navitem a');
+                    let navitem = $('.navitem');
+                    navitem.css('padding', '10');
+                    navitem.css('margin', '0');
+                    buttonBack.html(`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M14.5 1.5L1.5 14.5M1.5 1.5L14.5 14.5" stroke="#1890FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                    `);
+                    buttonBack.removeClass('btn btn-secondary')
+
+                    //Set auto clone time after 100ms
+                    setInterval(()=>{
+                        var quizTimerLeft = $("#quiz-timer span").text();
+                        $('#quiz-timer-clone').text(quizTimerLeft);
+                    }, 100);
+                }
+
+                //get total answer
+                let totalanswer = $('.numberquestiondo').parent().text();
+                totalanswer = totalanswer.split('/')[1];
+
+                let count =0;
+                $('input').on('change', function(){
+                    var name = $(this).attr('name');
+                    // choice
+                    var replacePrefix = "_choice";
+                    if(name.search(replacePrefix) > 0){
+                        var startposition = name.search(replacePrefix);
+                        name = name.slice(0, startposition);
+                        name = name.split(':')[1];
+                        if($('.quiznavbutton'+name).hasClass('answersaved') === false){
+                            count++;
+                            $('.numberquestiondo').html(count <= totalanswer ? count : totalanswer)
+                            $('.quiznavbutton'+name).addClass('answersaved')
+                        }
+                    }
+                    // answer
+                    replacePrefix = "_answer";
+                    if(name.search(replacePrefix) > 0){
+                        name = name.replace('_answer','');
+                        name = name.split(':')[1];
+                        if($('.quiznavbutton'+name).hasClass('answersaved') === false){
+                            count++;
+                            $('.numberquestiondo').html(count <= totalanswer ? count : totalanswer)
+                            $('.quiznavbutton'+name).addClass('answersaved')
+                        }
+                    }
+
+               })
+                $('.custom-list-question-minimap .qnbutton').each(function(){
+                    if($(this).hasClass('answersaved') === true){
+                        count= count+1;
+                    }
+                });
+
+                $('.numberquestiondo').html(count <= totalanswer ? count : totalanswer);
+
+            });
+        {{/review}}
+        {{#review}}
+            $(document).ready(function() {
+                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    $(".navbar").addClass('hidden');
+                    $("#page-header").addClass('hidden');
+
+                    let page = $('#page');
+
+                    let secondaryNavigation = document.querySelector('.secondary-navigation');
+                    if (secondaryNavigation) {
+                        secondaryNavigation.style.setProperty('top', '0', 'important');
+                        page.attr('style', 'margin-top: 60px !important');
+                    } else {
+                        page.attr('style', 'margin-top: 0px !important');
+                    }
+                    let html = `<div class="container-fluid tertiary-navigation" style="background-color: #fff">
+                                    <div class="row position-relative justify-content-between align-center" >
+                                        <div class="navitem py-2 pl-4 pr-2" style="padding: 10px; margin: 0px;">
+                                            <a class="aalink" id="finish-review-clone" href="${page.find('.aalink.mb-3.btn').attr('href')}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M14.5 1.5L1.5 14.5M1.5 1.5L14.5 14.5" stroke="#1890FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            </a>
+                                        </div>
+
+                                        <div class="p-2"><span class="h5 color-1890FF">{{#str}}examresult,theme_moove{{/str}}</span></div>
+                                        <div>&emsp;&emsp;&emsp;</div>
+                                    </div>
+                                    <hr class="my-1 hr-mobile top-53">
+                                </div>`;
+
+                    page.prepend(html);
+                    $('#region-main').addClass('p-0');
+
+                    /*
+                    let row = $(".navitem").parent()
+                    let html = `<div class="h5 m-0">
+                                    <span>⏱</span>
+                                    <b><span id="quiz-timer-clone">00:00:00</span></b>
+                                </div>
+                                <div>
+                                    <a class="endtestlink aalink mb-3 btn btn-primary background-color-1890FF" id="btl-submit-clone" style="display: block;border: none; margin: 0 !important;" href="${$('#btn-submit').attr('href')}">{{#str}}submit,theme_moove{{/str}}</a>
+                                </div>`;
+                    row.append(html);
+                    row.addClass('justify-content-between align-items-center');*/
+
+
+                    // let buttonBack = $('.navitem a');
+                    // let navitem = $('.navitem');
+                    // navitem.css('padding', '10');
+                    // navitem.css('margin', '0');
+                    // buttonBack.html(`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    //                     <path d="M14.5 1.5L1.5 14.5M1.5 1.5L14.5 14.5" stroke="#1890FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    //                 </svg>
+                    // `);
+                    // buttonBack.removeClass('btn btn-secondary')
+                }
+            });
+        {{/review}}
+    {{/modquizattempt}}
+    {{#modscormplayer}}
+    $(document).ready(function(){
+        $('#topofscroll').addClass('p-0');
+        // $('#topofscroll [role="main"]').addClass('p-0');
+
+    });
+    {{/modscormplayer}}
+</script>
+</html>
+{{#js}}
+    M.util.js_pending('theme_boost/loader');
+    require(['theme_boost/loader', 'theme_boost/drawer'], function(Loader, Drawer) {
+    Drawer.init();
+    M.util.js_complete('theme_boost/loader');
+    });
+{{/js}}

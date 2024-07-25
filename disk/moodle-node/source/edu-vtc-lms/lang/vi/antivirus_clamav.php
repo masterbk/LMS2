@@ -1,0 +1,30 @@
+<?php
+$string["antivirusfailed"] = 'Hiện tại có vấn đề với quá trình quét AntiVirus. ';
+$string["configclamactlikevirus"] = 'Xử lý các tập tin như virus';
+$string["configclamdonothing"] = 'Xử lý các tập tin là OK';
+$string["configclamfailureonupload"] = 'Nếu \'Xử lý tệp là OK\' được chọn, tệp sẽ được chuyển đến thư mục đích. ';
+$string["configclamtryagain"] = 'Từ chối tải lên, thử lại';
+$string["clamfailureonupload"] = 'Về lỗi ClamAV';
+$string["errorcantopensocket"] = 'Kết nối với ổ cắm tên miền Unix dẫn đến lỗi {$a}';
+$string["errorclamavnoresponse"] = 'ClamAV không phản hồi; ';
+$string["errornounixsocketssupported"] = 'Vận chuyển ổ cắm tên miền Unix không được hỗ trợ trên hệ thống này. ';
+$string["pathtoclam"] = 'Dòng lệnh';
+$string["pathtoclamdesc"] = 'Nếu phương thức chạy được đặt thành \"dòng lệnh\", hãy nhập đường dẫn đến ClamAV tại đây. ';
+$string["pathtounixsocket"] = 'Ổ cắm tên miền Unix';
+$string["pathtounixsocketdesc"] = 'Nếu phương thức chạy được đặt thành \"Ổ cắm miền Unix\", hãy nhập đường dẫn đến ổ cắm ClamAV Unix tại đây. ';
+$string["pluginname"] = 'Phần mềm diệt virus ClamAV';
+$string["privacy:metadata"] = 'Plugin chống vi-rút ClamAV không lưu trữ bất kỳ dữ liệu cá nhân nào.';
+$string["quarantinedir"] = 'Thư mục cách ly';
+$string["runningmethod"] = 'Phương pháp chạy';
+$string["runningmethoddesc"] = 'Phương pháp chạy ClamAV. ';
+$string["runningmethodcommandline"] = 'Dòng lệnh';
+$string["runningmethodunixsocket"] = 'Ổ cắm tên miền Unix';
+$string["runningmethodtcpsocket"] = 'ổ cắm TCP';
+$string["tcpsockethost"] = 'Tên máy chủ ổ cắm TCP';
+$string["tcpsockethostdesc"] = 'Tên miền của máy chủ ClamAV';
+$string["tcpsocketport"] = 'Cổng ổ cắm TCP';
+$string["tcpsocketportdesc"] = 'Cổng sử dụng khi kết nối với ClamAV';
+$string["tries"] = 'Nỗ lực quét';
+$string["tries_desc"] = 'Số lần ClamAV thực hiện nếu có lỗi trong quá trình quét.';
+$string["tries_notice"] = 'Quá trình quét Clamav đã thử {$a->tries} lần.
+';

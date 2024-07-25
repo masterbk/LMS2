@@ -1,0 +1,56 @@
+<div class="signup-form-username form-group">
+    <p class="signup-label">{{#str}} username {{/str}}</p>
+    <div class="form-group has-search">
+    <input type="text" name="username" class="{{#errors.usernameerror}}error-input{{/errors.usernameerror}} form-control form-control-lg p-3" value="{{postvalue.username}}" placeholder="{{#cleanstr}}usernameplaceholder,theme_moove{{/cleanstr}}" autocomplete="username">
+    </div>
+        {{#errors.usernameerror}}
+        <span class="error mt-1" style="color: #FF0500;font-size: 12px;font-weight: 500;">{{errors.usernameerror}}</span>
+    {{/errors.usernameerror}}
+</div>
+<div class="signup-form-fullname form-group">
+    <p class="signup-label">{{#str}} fullnamelabel,theme_moove {{/str}}</p>
+    <div class="form-group has-search">
+        <input type="text" name="fullname" value="{{postvalue.fullname}}" class="{{#errors.fullnameerror}}error-input{{/errors.fullnameerror}} form-control form-control-lg p-3" placeholder="{{#cleanstr}}fullnameplaceholder,theme_moove{{/cleanstr}}" autocomplete="current-fullname">
+    </div>
+    {{#errors.fullnameerror}}
+        <span class="error mt-1" style="color: #FF0500;font-size: 12px;font-weight: 500;">{{errors.fullnameerror}}</span>
+    {{/errors.fullnameerror}}
+
+
+</div>
+<div class="signup-form-email form-group">
+    <p class="signup-label">{{#str}} email {{/str}}</p>
+    <div class="form-group has-search">
+        <input type="email" name="email" class="{{#errors.emailerror}}error-input{{/errors.emailerror}} form-control form-control-lg p-3" placeholder="{{#cleanstr}}emailplaceholder,theme_moove{{/cleanstr}}" autocomplete="current-email"
+               value="{{postvalue.email}}">
+    </div>
+    {{#errors.emailerror}}
+        <span class="error mt-1" style="color: #FF0500;font-size: 12px;font-weight: 500;">{{errors.emailerror}}</span>
+    {{/errors.emailerror}}
+
+
+</div>
+<div class="signup-form-password form-group">
+    <p class="signup-label">{{#str}} password {{/str}}</p>
+    <div class="form-group has-search">
+        <span class="fa-regular fa-eye-slash form-control-showpassword" style="position: absolute;font-size:20px;right: 20px;z-index: 2;display: block;width: 2.375rem;height: 45px;line-height: 45px;text-align: center;cursor: pointer;color: #aaa;"></span>
+        <input type="password" name="password"  class="{{#errors.passworderror}}error-input{{/errors.passworderror}} password form-control form-control-lg p-3" placeholder="{{#cleanstr}}passwordplaceholder,theme_moove{{/cleanstr}}" autocomplete="current-password"
+               value="{{postvalue.password}}">
+    </div>
+    {{#errors.passworderror}}
+        <span class="error mt-1" style="color: #FF0500;font-size: 12px;font-weight: 500;">{{errors.passworderror}}</span>
+    {{/errors.passworderror}}
+</div>
+<div class="signup-form-city form-group">
+    <p class="signup-label">{{#str}} city {{/str}}</p>
+    <div class="form-group has-search">
+        <input type="text" data-toggle="modal" data-target=".custom-signup-city" name="city"  class="{{#errors.cityerror}}error-input{{/errors.cityerror}} form-control form-control-lg p-3" placeholder="{{#cleanstr}}cityplaceholder,theme_moove{{/cleanstr}}" autocomplete="current-city"
+               value="{{postvalue.city}}">
+    </div>
+    {{#errors.cityerror}}
+        <span class="error mt-1" style="color: #FF0500;font-size: 12px;font-weight: 500;">{{errors.cityerror}}</span>
+    {{/errors.cityerror}}
+</div>
+<div class="signup-form-submit form-group">
+    <button class="btn btn-primary btn-block btn-lg p-2 border-unset background-color-1890FF" type="submit" style="height: 42px">{{#str}}register,theme_moove{{/str}}</button>
+</div>

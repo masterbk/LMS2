@@ -1,0 +1,20 @@
+<?php
+$string["audiocssclass"] = 'Lớp CSS cho âm thanh';
+$string["audioextensions"] = 'Phần mở rộng tập tin âm thanh';
+$string["configaudiocssclass"] = 'Một lớp CSS sẽ được thêm vào';
+$string["configaudioextensions"] = 'Danh sách các phần mở rộng tệp âm thanh được hỗ trợ được phân tách bằng dấu phẩy. ';
+$string["configlimitsize"] = 'Nếu được bật và không chỉ định chiều rộng và chiều cao, video sẽ hiển thị với chiều rộng và chiều cao mặc định. ';
+$string["configvideocssclass"] = 'Một lớp CSS sẽ được thêm vào';
+$string["configvideoextensions"] = 'Danh sách các phần mở rộng tệp video được hỗ trợ được phân tách bằng dấu phẩy. ';
+$string["configyoutube"] = 'Sử dụng VideoJS để phát video YouTube. ';
+$string["limitsize"] = 'Giới hạn kích thước';
+$string["pluginname"] = 'Trình phát VideoJS';
+$string["pluginname_help"] = 'Trình bao bọc JavaScript cho các tệp video được trình phát video gốc của trình duyệt phát. ';
+$string["privacy:metadata"] = 'Plugin phương tiện trình phát VideoJS không lưu trữ bất kỳ dữ liệu cá nhân nào.';
+$string["videoextensions"] = 'Phần mở rộng tập tin video';
+$string["videocssclass"] = 'Lớp CSS cho video';
+$string["youtube"] = 'video YouTube';
+$string["configrtmp"] = 'Nếu được bật, các liên kết bắt đầu bằng rtmp:// sẽ được plugin xử lý, bất kể tiện ích mở rộng có được bật trong cài đặt Tiện ích mở rộng tệp video (tiện ích mở rộng video) hay không. ';
+$string["configuseflash"] = 'Sử dụng trình phát Flash nếu định dạng video không được trình duyệt và/hoặc trình phát VideoJS hỗ trợ nguyên bản. ';
+$string["rtmp"] = 'luồng RTMP';
+$string["useflash"] = 'Sử dụng dự phòng Flash';

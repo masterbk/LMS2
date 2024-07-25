@@ -1,0 +1,22 @@
+<?php
+$string["amountmismatch"] = 'Số tiền bạn cố gắng thanh toán không khớp với mức phí bắt buộc. ';
+$string["authorising"] = 'Ủy quyền thanh toán. ';
+$string["brandname"] = 'Tên thương hiệu';
+$string["brandname_help"] = 'Nhãn tùy chọn ghi đè tên doanh nghiệp cho tài khoản PayPal trên trang PayPal.';
+$string["cannotfetchorderdatails"] = 'Không thể lấy chi tiết thanh toán từ PayPal. ';
+$string["clientid"] = 'ID khách hàng';
+$string["clientid_help"] = 'ID khách hàng mà PayPal đã tạo cho ứng dụng của bạn.';
+$string["environment"] = 'Môi trường';
+$string["environment_help"] = 'Bạn có thể đặt tùy chọn này thành Hộp cát nếu bạn đang sử dụng tài khoản hộp cát (chỉ nhằm mục đích thử nghiệm).';
+$string["gatewaydescription"] = 'PayPal là nhà cung cấp cổng thanh toán được ủy quyền để xử lý các giao dịch thẻ tín dụng.';
+$string["gatewayname"] = 'PayPal';
+$string["internalerror"] = 'Đã xảy ra một lỗi nội bộ. ';
+$string["live"] = 'Sống';
+$string["paymentnotcleared"] = 'thanh toán không được xóa bởi PayPal.';
+$string["pluginname"] = 'PayPal';
+$string["pluginname_desc"] = 'Plugin PayPal cho phép bạn nhận thanh toán qua PayPal.';
+$string["privacy:metadata"] = 'Plugin PayPal không lưu trữ bất kỳ dữ liệu cá nhân nào.';
+$string["repeatedorder"] = 'Đơn đặt hàng này đã được xử lý trước đó.';
+$string["sandbox"] = 'Hộp cát';
+$string["secret"] = 'Bí mật';
+$string["secret_help"] = 'Bí mật mà PayPal tạo ra cho ứng dụng của bạn.';

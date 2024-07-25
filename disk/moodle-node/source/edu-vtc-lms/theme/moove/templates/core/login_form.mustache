@@ -1,0 +1,50 @@
+<input type="hidden" name="logintoken" value="{{logintoken}}">
+<div class="login-form-username form-group">
+    <p class="signup-label">{{#str}} username {{/str}}</p>
+    <div class="form-group has-search">
+        <input type="text" name="username" class="{{#paramsubmit.errorusername}}error-input{{/paramsubmit.errorusername}} form-control form-control-lg p-3" value="{{paramsubmit.username}}" placeholder="{{^canloginbyemail}}{{#cleanstr}}username{{/cleanstr}}{{/canloginbyemail}} {{#canloginbyemail}}{{#cleanstr}}usernameemail{{/cleanstr}}{{/canloginbyemail}}" autocomplete="username">
+    </div>
+    {{#paramsubmit.errorusername}}
+        <p class="error mt-2" style="color: #FF0500;font-size: 16px;font-weight: 500;">{{paramsubmit.errorusername}}</p>
+    {{/paramsubmit.errorusername}}
+</div>
+<div class="login-form-password form-group">
+    <p class="signup-label">{{#str}} password {{/str}}</p>
+    <div class="form-group has-search">
+        <span class="fa-regular fa-eye-slash form-control-showpassword" style="position: absolute;font-size:20px;right: 20px;z-index: 2;display: block;width: 2.375rem;height: 45px;line-height: 45px;text-align: center;cursor: pointer;color: #aaa;"></span>
+        <input type="password" name="password" class="{{#paramsubmit.errorpassword}}error-input{{/paramsubmit.errorpassword}} password form-control form-control-lg p-3" placeholder="{{#cleanstr}}password{{/cleanstr}}" autocomplete="current-password"
+               value="{{paramsubmit.password}}">
+    </div>
+    {{#paramsubmit.errorpassword}}
+        <p class="error mt-2" style="color: #FF0500;font-size: 16px;font-weight: 500;">{{paramsubmit.errorpassword}}</p>
+    {{/paramsubmit.errorpassword}}
+
+
+</div>
+{{#paramsubmit.errorlogin}}
+    <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document" style="position: absolute;top:50%;left:50%; transform: translate(-50%,-50%)">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{#str}}loginerror,theme_moove{{/str}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <!--<span aria-hidden="true">&times;</span>-->
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>{{paramsubmit.errorlogin}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{#str}}close, theme_moove{{/str}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/paramsubmit.errorlogin}}
+
+<div class="login-form-forgotpassword form-group text-right">
+    <a href="{{forgotpasswordurl}}">{{#str}}forgotaccount,theme_moove{{/str}}</a>
+</div>
+<div class="login-form-submit form-group">
+    <button class="btn btn-primary btn-block btn-lg p-2 border-unset background-color-1890FF" type="submit" id="loginbtn" style="height: 42px">{{#str}}login,theme_moove{{/str}}</button>
+</div>

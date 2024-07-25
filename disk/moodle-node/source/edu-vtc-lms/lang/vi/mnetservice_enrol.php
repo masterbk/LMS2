@@ -1,0 +1,22 @@
+<?php
+$string["availablecourseson"] = 'Các khóa học có sẵn trên {$a}';
+$string["availablecoursesonnone"] = 'Máy chủ từ xa <a href=\"{$a->Hosturl}\">{$a->tên máy chủ}</a> không cung cấp bất kỳ khóa học nào cho người dùng của chúng tôi.';
+$string["clientname"] = 'Khách hàng đăng ký từ xa';
+$string["clientname_help"] = 'Công cụ này cho phép bạn đăng ký và hủy đăng ký người dùng cục bộ của mình trên các máy chủ từ xa cho phép bạn thực hiện việc đó thông qua plugin \'Đăng ký từ xa MNet\'.';
+$string["editenrolments"] = 'Chỉnh sửa tuyển sinh';
+$string["hostappname"] = 'Ứng dụng';
+$string["hostname"] = 'Tên máy chủ';
+$string["hosturl"] = 'Đường dẫn máy chủ từ xa';
+$string["nopublishers"] = 'Không có đồng nghiệp từ xa có sẵn.';
+$string["noroamingusers"] = 'Người dùng yêu cầu khả năng \'{$a}\' trong ngữ cảnh hệ thống để được đăng ký tham gia các khóa học từ xa, tuy nhiên hiện tại không có người dùng nào có khả năng này. ';
+$string["otherenrolledusers"] = 'Người dùng đã đăng ký khác';
+$string["pluginname"] = 'Dịch vụ đăng ký từ xa';
+$string["refetch"] = 'Tìm nạp lại trạng thái cập nhật từ máy chủ từ xa';
+$string["privacy:metadata:mnetservice_enrol_enrolments"] = 'Dịch vụ đăng ký từ xa';
+$string["privacy:metadata:mnetservice_enrol_enrolments:enroltime"] = 'Thời điểm đăng ký được sửa đổi';
+$string["privacy:metadata:mnetservice_enrol_enrolments:enroltype"] = 'Loại đăng ký trên máy chủ từ xa được sử dụng để đăng ký người dùng vào khóa học của họ';
+$string["privacy:metadata:mnetservice_enrol_enrolments:hostid"] = 'ID của máy chủ MNet từ xa';
+$string["privacy:metadata:mnetservice_enrol_enrolments:remotecourseid"] = 'ID của khóa học trên máy chủ từ xa';
+$string["privacy:metadata:mnetservice_enrol_enrolments:rolename"] = 'Tên của vai trò trên máy chủ từ xa';
+$string["privacy:metadata:mnetservice_enrol_enrolments:tableexplanation"] = 'Dịch vụ đăng ký từ xa lưu trữ thông tin về việc đăng ký người dùng cục bộ vào các khóa học trên máy chủ từ xa.';
+$string["privacy:metadata:mnetservice_enrol_enrolments:userid"] = 'ID của người dùng cục bộ trên máy chủ này';
