@@ -1,0 +1,120 @@
+version: '26.0.0'
+
+###network
+networks:
+  lms-network:
+    driver: bridge
+
+###volume
+volumes:
+  lms-source-vol:
+    driver: local
+    driver_opts:
+      device: ./disk/moodle-node/source
+      type: none
+      o: bind
+  ##volume caching redis
+  lms-redis:
+    driver: local
+    driver_opts:
+      device: ./disk/caching-redis/data
+      type: none
+      o: bind
+  ##volume storage minio
+  lms-minio:
+    driver: local
+    driver_opts:
+      device: ./disk/storage-minio/data
+      type: none
+      o: bind
+  ##volume db cluster galena
+  #volume db node 1 / master
+  lms-db-node1:
+    driver: local
+    driver_opts:
+      device: ./disk/maria-db/data/node1
+      type: none
+      o: bind
+  #volume db node 2
+  lms-db-node2:
+    driver: local
+    driver_opts:
+      device: ./disk/maria-db/data/node2
+      type: none
+      o: bind
+  #volume db node 3
+  lms-db-node3:
+    driver: local
+    driver_opts:
+      device: ./disk/maria-db/data/node3
+      type: none
+      o: bind
+  #volume nfs service
+  lms-nfs-service-vol:
+    driver: local
+    driver_opts:
+      device: ./disk/nfs-service/data
+      type: none
+      o: bind
+  # #volume nfs service: dùng cho lms node
+  # lms-nfs-service-vol-driver:
+  #   driver: local
+  #   driver_opts:
+  #     type: nfs
+  #     o: addr=lms-nfs-service-cn,nolock,soft,rw
+  #     device: ":/lms/data"
+
+###services
+services:
+  lms-db-01:
+    container_name: lms-db-01-cn
+    hostname: lms-db-01-hn
+    #image: docker.io/bitnami/mariadb-galera:10.7
+    image: bitnami/mariadb-galera:latest
+    ports:
+      - '3391:3306'
+      #- '4444:4444'
+      #- '4567:4567'
+      #- '4568:4568'
+    networks:
+      - lms-network
+    volumes:
+      - ./disk/maria-db/config/node1/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:ro
+      #- lms-db-node1:/bitnami/mariadb
+      - ./disk/maria-db/data/dump:/docker-entrypoint-initdb.d
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_GALERA_CLUSTER_NAME=mariadb-cluster
+      - MARIADB_GALERA_CLUSTER_BOOTSTRAP=yes
+      - MARIADB_GALERA_FORCE_SAFETOBOOTSTRAP=yes
+      # MARIADB_GALERA_CLUSTER_ADDRESS point to bootstrap node
+      - MARIADB_GALERA_CLUSTER_ADDRESS=gcomm://lms-db-01:4567,lms-db-02:4567,lms-db-03:4567,0.0.0.0:4567
+      - MARIADB_EXTRA_FLAGS=--max-connect-errors=1000 --max_connections=155
+      - MARIADB_GALERA_MARIABACKUP_USER=mariadb_backup_user
+      - MARIADB_GALERA_MARIABACKUP_PASSWORD=backup_pwd
+      - MARIADB_ROOT_PASSWORD=root_password
+      - MARIADB_REPLICATION_USER=rep_user
+      - MARIADB_REPLICATION_PASSWORD=rep_pwd
+      - MARIADB_DATABASE=moodle_eduvtclms
+    #command: mariadb -u root -proot_password moodle_eduvtclms < /bitnami/mariadb/moodle_eduvtclms.sql
+    healthcheck:
+      test: ['CMD', '/opt/bitnami/scripts/mariadb-galera/healthcheck.sh']
+      interval: 15s
+      timeout: 5s
+      retries: 6
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: unless-stopped
+    ports:
+      - 8081:80
+    environment:
+      - UPLOAD_LIMIT=1G
+      - MEMORY_LIMIT=2G
+      - PMA_HOST=lms-db-01-cn:3306
+    container_name: myphpadmin
+    depends_on:
+      - lms-db-01
+    networks:
+      - lms-network
+  

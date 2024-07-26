@@ -122,6 +122,7 @@ services:
     volumes:
       - ./disk/maria-db/config/node1/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:ro
       - lms-db-node1:/bitnami/mariadb
+      - ./disk/maria-db/data/dump:/docker-entrypoint-initdb.d
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
@@ -232,10 +233,11 @@ services:
   lms-node-01:
     container_name: lms-node-01-cn
     hostname: lms-node-01-hn
+    image: thuybk23/moodle-vtc:v1 #moodle-vtc:v1
     restart: unless-stopped
-    build: 
-      dockerfile: Dockerfile
-      context: ./disk/moodle-node
+    #build: 
+    #  dockerfile: Dockerfile
+    #  context: ./disk/moodle-node
     networks:
       - lms-network
     volumes:
@@ -244,7 +246,7 @@ services:
       - ./disk/moodle-node/config/node1/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
       - ./disk/moodle-node/config/node1/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./disk/moodle-node/config/node1/nginx/site-enable/vtc.conf:/etc/nginx/sites-enabled/vtc.conf
-      - lms-source-vol:/var/www/html/
+      #- lms-source-vol:/var/www/html/
       - lms-nfs-service-vol:/lms/data
     ports:
       - 80:80
