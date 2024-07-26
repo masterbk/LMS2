@@ -246,7 +246,7 @@ services:
       - ./disk/moodle-node/config/node1/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
       - ./disk/moodle-node/config/node1/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./disk/moodle-node/config/node1/nginx/site-enable/vtc.conf:/etc/nginx/sites-enabled/vtc.conf
-      #- lms-source-vol:/var/www/html/
+      - lms-source-vol:/var/www/html/
       - lms-nfs-service-vol:/lms/data
     ports:
       - 80:80
