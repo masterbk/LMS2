@@ -76,7 +76,7 @@ services:
       - lms-network
     volumes:
       - ./disk/caching-redis/config/redis.conf:/etc/redis/redis.conf
-      - lms-redis:/data
+      #- lms-redis:/data
     ports:
       - "6379:6379"
     #command: redis-server /etc/redis/redis.conf
