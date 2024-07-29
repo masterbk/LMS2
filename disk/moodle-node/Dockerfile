@@ -21,6 +21,7 @@ RUN install-php-extensions zip mysqli pdo_mysql gd intl soap exif redis
 WORKDIR /var/www/html
 COPY ./supervisord.conf /etc/supervisord.conf
 COPY ./source /var/www/html
+RUN chmod -R 777 /var/www/html
 #COPY edu-vtc-lms/ .
 
 # run supervisor

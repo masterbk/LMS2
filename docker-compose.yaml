@@ -5,12 +5,12 @@ networks:
 
 ###volume
 volumes:
-  #lms-source-vol:
-  #  driver: local
-  #  driver_opts:
-  #    device: ./disk/moodle-node/source
-  #    type: none
-  #    o: bind
+  lms-source-vol:
+    driver: local
+    driver_opts:
+      device: ./disk/moodle-node/source
+      type: none
+      o: bind
   ##volume caching redis
   lms-redis:
     driver: local
