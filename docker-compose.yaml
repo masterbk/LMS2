@@ -231,7 +231,7 @@ services:
   lms-node-01:
     container_name: lms-node-01-cn
     hostname: lms-node-01-hn
-    image: thuybk23/moodle-vtc:v1 #moodle-vtc:v1
+    image: thuybk23/moodle-vtc:v2 #moodle-vtc:v1
     restart: unless-stopped
     #build: 
     #  dockerfile: Dockerfile
