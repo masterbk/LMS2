@@ -5,55 +5,55 @@ networks:
 
 ###volume
 volumes:
-  lms-source-vol:
-    driver: local
-    driver_opts:
-      device: ./disk/moodle-node/source
-      type: none
-      o: bind
+  #lms-source-vol:
+  #  driver: local
+  #  driver_opts:
+  #    device: ./disk/moodle-node/source
+  #    type: none
+  #    o: bind
   ##volume caching redis
-  lms-redis:
-    driver: local
-    driver_opts:
-      device: ./disk/caching-redis/data
-      type: none
-      o: bind
+  #lms-redis:
+  #  driver: local
+  #  driver_opts:
+  #    device: ./disk/caching-redis/data
+  #    type: none
+  #    o: bind
   ##volume storage minio
-  lms-minio:
-    driver: local
-    driver_opts:
-      device: ./disk/storage-minio/data
-      type: none
-      o: bind
+  #lms-minio:
+  #  driver: local
+  #  driver_opts:
+  #    device: ./disk/storage-minio/data
+  #    type: none
+  #    o: bind
   ##volume db cluster galena
   #volume db node 1 / master
-  lms-db-node1:
-    driver: local
-    driver_opts:
-      device: ./disk/maria-db/data/node1
-      type: none
-      o: bind
+  #lms-db-node1:
+  #  driver: local
+  #  driver_opts:
+  #    device: ./disk/maria-db/data/node1
+  #    type: none
+  #    o: bind
   #volume db node 2
-  lms-db-node2:
-    driver: local
-    driver_opts:
-      device: ./disk/maria-db/data/node2
-      type: none
-      o: bind
+  #lms-db-node2:
+  #  driver: local
+  #  driver_opts:
+  #    device: ./disk/maria-db/data/node2
+  #    type: none
+  #    o: bind
   #volume db node 3
-  lms-db-node3:
-    driver: local
-    driver_opts:
-      device: ./disk/maria-db/data/node3
-      type: none
-      o: bind
+  #lms-db-node3:
+  #  driver: local
+  #  driver_opts:
+  #    device: ./disk/maria-db/data/node3
+  #    type: none
+  #    o: bind
   #volume nfs service
-  lms-nfs-service-vol:
-    driver: local
-    driver_opts:
-      device: ./disk/nfs-service/data
-      type: none
-      o: bind
+  #lms-nfs-service-vol:
+  #  driver: local
+  #  driver_opts:
+  #    device: ./disk/nfs-service/data
+  #    type: none
+  #    o: bind
   # #volume nfs service: dùng cho lms node
   # lms-nfs-service-vol-driver:
   #   driver: local
@@ -89,8 +89,8 @@ services:
     restart: always
     networks:
       - lms-network
-    volumes:
-      - lms-minio:/data
+    #volumes:
+    #  - lms-minio:/data
     ports:
       - "9090:9090"
       - "9091:9091"
@@ -246,7 +246,7 @@ services:
       - ./disk/moodle-node/config/node1/nginx/site-enable/vtc.conf:/etc/nginx/sites-enabled/vtc.conf
       - ./disk/moodle-node/config/config.php:/var/www/html/edu-vtc-lms/config.php
       #- lms-source-vol:/var/www/html/
-      - lms-nfs-service-vol:/lms/data
+      #- lms-nfs-service-vol:/lms/data
     ports:
       - 80:80
       - 443:443
