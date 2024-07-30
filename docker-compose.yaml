@@ -4,7 +4,7 @@ networks:
     driver: bridge
 
 ###volume
-volumes:
+#volumes:
   #lms-source-vol:
   #  driver: local
   #  driver_opts:
