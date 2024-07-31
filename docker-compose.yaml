@@ -5,59 +5,59 @@ networks:
 
 ###volume
 #volumes:
-  #lms-source-vol:
-  #  driver: local
-  #  driver_opts:
-  #    device: ./disk/moodle-node/source
-  #    type: none
-  #    o: bind
-  ##volume caching redis
-  #lms-redis:
-  #  driver: local
-  #  driver_opts:
-  #    device: ./disk/caching-redis/data
-  #    type: none
-  #    o: bind
-  ##volume storage minio
-  #lms-minio:
-  #  driver: local
-  #  driver_opts:
-  #    device: ./disk/storage-minio/data
-  #    type: none
-  #    o: bind
-  ##volume db cluster galena
-  #volume db node 1 / master
-  #lms-db-node1:
-  #  driver: local
-  #  driver_opts:
-  #    device: ./disk/maria-db/data/node1
-  #    type: none
-  #    o: bind
-  #volume db node 2
-  #lms-db-node2:
-  #  driver: local
-  #  driver_opts:
-  #    device: ./disk/maria-db/data/node2
-  #    type: none
-  #    o: bind
-  #volume db node 3
-  #lms-db-node3:
-  #  driver: local
-  #  driver_opts:
-  #    device: ./disk/maria-db/data/node3
-  #    type: none
-  #    o: bind
-  #volume nfs service
-  #lms-nfs-service-vol:
-  #  driver: local
-  #  driver_opts:
-  #    device: ./disk/nfs-service/data
-  #    type: none
-  #    o: bind
+#  lms-source-vol:
+#    driver: local
+#    driver_opts:
+#      device: ./disk/moodle-node/source
+#      type: none
+#      o: bind
+#  #volume caching redis
+#  lms-redis:
+#    driver: local
+#    driver_opts:
+#      device: ./disk/caching-redis/data
+#      type: none
+#      o: bind
+#  #volume storage minio
+#  lms-minio:
+#    driver: local
+#    driver_opts:
+#      device: ./disk/storage-minio/data
+#      type: none
+#      o: bind
+#  #volume db cluster galena
+#  #volume db node 1 / master
+#  lms-db-node1:
+#    driver: local
+#    driver_opts:
+#      device: ./disk/maria-db/data/node1
+#      type: none
+#      o: bind
+#  #volume db node 2
+#  lms-db-node2:
+#    driver: local
+#    driver_opts:
+#      device: ./disk/maria-db/data/node2
+#      type: none
+#      o: bind
+#  #volume db node 3
+#  lms-db-node3:
+#    driver: local
+#    driver_opts:
+#      device: ./disk/maria-db/data/node3
+#      type: none
+#      o: bind
+#  #volume nfs service
+#  lms-nfs-service-vol:
+#    driver: local
+#    driver_opts:
+#      device: ./disk/nfs-service/data
+#      type: none
+#      o: bind
   # #volume nfs service: dùng cho lms node
-  # lms-nfs-service-vol-driver:
-  #   driver: local
-  #   driver_opts:
+  #lms-nfs-service-vol-driver:
+  #  driver: local
+  #  driver_opts:
   #     type: nfs
   #     o: addr=lms-nfs-service-cn,nolock,soft,rw
   #     device: ":/lms/data"
@@ -231,7 +231,7 @@ services:
   lms-node-01:
     container_name: lms-node-01-cn
     hostname: lms-node-01-hn
-    image: thuybk23/moodle-vtc:v2 #moodle-vtc:v1
+    image: thuybk23/moodle-vtc:latest #moodle-vtc:v1
     restart: unless-stopped
     #build: 
     #  dockerfile: Dockerfile
